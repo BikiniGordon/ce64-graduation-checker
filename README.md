@@ -6,6 +6,13 @@ what you still need to enroll in to graduate (Computer Engineering, curriculum à
 
 **Nothing is uploaded** â€” the PDF/Excel are parsed entirely in your browser.
 
+## Live site
+
+**https://bikinigordon.github.io/ce64-graduation-checker/**
+
+Hosted via GitHub Pages, deployed from the `main` branch (repo is private; the published
+site itself is publicly viewable, as GitHub Pages requires).
+
 ## Run it
 
 ```bash
