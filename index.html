@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CE KMITL – Graduation Checker</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <!-- pdf.js + ExcelJS from CDN (all processing stays in your browser) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>🎓 CE KMITL — Graduation Checker</h1>
+    <p class="sub">Upload your unofficial transcript PDF to see what you still need to graduate.
+      <strong>Everything runs in your browser — nothing is uploaded.</strong></p>
+    <p class="disclaimer">⚠️ Unofficial reference tool for the <strong>Computer Engineering curriculum พ.ศ. 2564 (CE64) only</strong>.
+      Course lists and rules were transcribed by hand and may contain mistakes — always double-check the results
+      against the official syllabus and your academic advisor before making enrollment decisions.</p>
+  </header>
+
+  <main>
+    <!-- Step 1: transcript -->
+    <section class="card">
+      <h2>1 · Upload transcript (PDF)</h2>
+      <div id="dropZone" class="drop-zone">
+        <input type="file" id="pdfInput" accept="application/pdf" hidden />
+        <p>Drag &amp; drop your transcript PDF here, or <button type="button" id="pdfBtn" class="link-btn">browse</button></p>
+      </div>
+      <p id="pdfStatus" class="status"></p>
+    </section>
+
+    <!-- Step 2: review parsed courses -->
+    <section class="card hidden" id="reviewSection">
+      <h2>2 · Review parsed courses</h2>
+      <p class="hint">Fix any mis-read row before checking. Grade blank = in-progress.</p>
+      <div id="studentInfo" class="student-info"></div>
+      <button type="button" id="toggleTitleBtn" class="secondary col-toggle-btn">Hide title column</button>
+      <div class="table-wrap">
+        <table id="courseTable">
+          <thead>
+            <tr><th>Code</th><th class="title-col">Title</th><th>Credit</th><th>Grade</th><th></th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="row-actions">
+        <button type="button" id="addRowBtn" class="secondary">+ Add row</button>
+        <button type="button" id="checkBtn" class="primary">Check graduation ▸</button>
+      </div>
+    </section>
+
+    <!-- Step 3: results -->
+    <section class="card hidden" id="resultSection">
+      <h2>3 · Graduation status</h2>
+      <p class="hint">Reference for CE64 (พ.ศ. 2564) only — verify against the official syllabus before relying on this.</p>
+      <div id="overall"></div>
+      <div id="categories"></div>
+      <div id="extras"></div>
+    </section>
+
+    <!-- Step 4: Excel -->
+    <section class="card hidden" id="excelSection">
+      <h2>4 · Fill your Excel checklist (optional)</h2>
+      <p class="hint">Upload your original tracking template. We'll tick completed courses,
+        fill active placeholder rows from your transcript, and skip struck-through rows.
+        Don't have the template? <a href="https://docs.google.com/spreadsheets/d/1R8q71tQRTK_kbs3xTkeHaSPa9aVjujJjepePnJegGrw/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Get a copy here</a>
+        (credit to its original author — not made by this tool).</p>
+      <input type="file" id="excelInput"
+        accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+      <button type="button" id="fillBtn" class="primary" disabled>Fill &amp; download ▾</button>
+      <p id="excelStatus" class="status"></p>
+      <ul id="excelLog" class="log"></ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>Curriculum: Computer Engineering, KMITL — พ.ศ. 2564 (CE64) only · Rules editable in <code>data/curriculum.json</code>
+      · Unofficial tool — always confirm results with the official syllabus / your advisor.</p>
+  </footer>
+
+  <script src="js/pdfParser.js"></script>
+  <script src="js/transcriptParser.js"></script>
+  <script src="js/matcher.js"></script>
+  <script src="js/excelFiller.js"></script>
+  <script src="js/ui.js"></script>
+</body>
+</html>

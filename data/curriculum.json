@@ -1,0 +1,230 @@
+{
+  "meta": {
+    "program": "Computer Engineering (วิศวกรรมคอมพิวเตอร์)",
+    "faculty": "Engineering, KMITL",
+    "year": "2564",
+    "totalCredits": 136,
+    "notes": "Reflects the confirmed edit: GenEd Faculty-required reduced 9->3, the 6 credits moved into GenEd Elective 6->12. GenEd total still = 30."
+  },
+  "codeAliases": {
+    "01076001": "01076101",
+    "90642999": "90641001"
+  },
+  "passingGrades": ["A", "B+", "B", "C+", "C", "D+", "D", "S"],
+  "genEdPrefix": "90",
+  "courseTitles": {
+    "90642036": "PRE-ACTIVITIES FOR ENGINEERS",
+    "90642118": "APPLICATION SOFTWARE FOR BUSINESS",
+
+    "01076140": "CALCULUS 1",
+    "01076141": "CALCULUS 2",
+    "01076032": "ELEMENTARY DIFFERENTIAL EQUATIONS AND LINEAR ALGEBRA",
+    "01076253": "PROBABILITY AND STATISTICS",
+    "01076101": "INTRODUCTION TO COMPUTER ENGINEERING",
+    "01076103": "PROGRAMMING FUNDAMENTAL",
+    "01076104": "PROGRAMMING PROJECT",
+    "01076107": "CIRCUITS AND ELECTRONICS",
+    "01076108": "CIRCUITS AND ELECTRONICS IN PRACTICE",
+    "01076011": "OPERATING SYSTEMS",
+    "01076012": "DISCRETE STRUCTURE",
+    "01006004": "INDUSTRIAL TRAINING",
+    "01076016": "COMPUTER ENGINEERING PROJECT PREPARATION",
+
+    "01076263": "DATABASE SYSTEMS",
+    "01076105": "OBJECT ORIENTED PROGRAMMING",
+    "01076106": "OBJECT ORIENTED PROGRAMMING PROJECT",
+    "01076109": "OBJECT ORIENTED DATA STRUCTURES",
+    "01076110": "OBJECT ORIENTED DATA STRUCTURES PROJECT",
+    "01076034": "PRINCIPLES OF SOFTWARE DEVELOPMENT PROCESS",
+    "01076119": "WEB APPLICATION DEVELOPMENT",
+    "01076120": "WEB APPLICATION DEVELOPMENT PROJECT",
+    "01076121": "THEORY OF COMPUTATION",
+    "01076116": "COMPUTER NETWORKS",
+    "01076117": "COMPUTER NETWORKS IN PRACTICE",
+    "01076040": "INTERNETWORKING STANDARDS AND TECHNOLOGIES",
+    "01076041": "INTERNETWORKING STANDARDS AND TECHNOLOGIES IN PRACTICE",
+    "01076118": "SYSTEM PLATFORM ADMINISTRATION",
+    "01076112": "DIGITAL SYSTEM FUNDAMENTALS",
+    "01076113": "DIGITAL SYSTEM FUNDAMENTALS IN PRACTICE",
+    "01076114": "COMPUTER ORGANIZATION AND ARCHITECTURE",
+    "01076115": "COMPUTER ORGANIZATION IN PRACTICE",
+    "01076050": "MICROCONTROLLER APPLICATION AND DEVELOPMENT",
+    "01076051": "MICROCONTROLLER PROJECT",
+
+    "01076052": "REAL-TIME EMBEDDED SYSTEMS",
+    "01076053": "INTERNET OF THINGS AND SMART SYSTEMS",
+    "01076035": "SOFTWARE DEVELOPMENT PROCESS IN PRACTICE",
+    "01076036": "USER EXPERIENCE AND USER INTERFACE DESIGN",
+    "01076037": "USER EXPERIENCE AND USER INTERFACE PROJECT",
+    "01076042": "INFORMATION AND COMPUTER SECURITY",
+    "01076043": "INTRODUCTION TO CLOUD ARCHITECTURE",
+    "01076044": "INTRODUCTION TO CLOUD ARCHITECTURE IN PRACTICE",
+
+    "01076311": "PROJECT 1",
+    "01076312": "PROJECT 2",
+    "01006029": "CO-OPERATIVE EDUCATION",
+    "01006005": "OVERSEA TRAINING",
+
+    "01076411": "MICRO ROBOT DEVELOPMENT",
+    "01076418": "HIGH PERFORMANCE COMPUTING",
+    "01076420": "ADVANCED DIGITAL DESIGN USING HDL",
+    "01076421": "EMBEDED SYSTEM DESIGN",
+    "01076414": "INTRODUCTION TO AUTONOMOUS VEHICLE",
+    "01076513": "COMPILER CONSTRUCTION",
+    "01076564": "DESIGN AND ANALYSIS OF ALGORITHMS",
+    "01076568": "HUMAN COMPUTER INTERACTION",
+    "01076589": "ADVANCED DATABASE SYSTEMS",
+    "01076599": "SOFTWARE TESTING AND QUALITY ASSURANCE",
+    "01076596": "SYSTEM REQUIREMENTS ENGINEERING",
+    "01076558": "MICROSERVICES AND REST API DESIGN",
+    "01076559": "SOFTWARE ARCHITECTURE AND DESIGN",
+    "01076560": "SMART MOBILE APPLICATION DEVELOPMENT",
+    "01076574": "DATA WAREHOUSE",
+    "01076585": "DATA MINING",
+    "01076634": "BIG DATA ARCHITECTURE",
+    "01076598": "INTRODUCTION TO DATA ANALYTICS",
+    "01076567": "IMAGE PROCESSING",
+    "01076566": "MULTIMEDIA SYSTEMS",
+    "01076583": "COMPUTER GRAPHICS",
+    "01076597": "AUGMENTED REALITY",
+    "01076532": "MACHINE LEARNING",
+    "01076582": "ARTIFICIAL INTELLIGENCE",
+    "01076595": "INFORMATION STORAGE AND WEB SEARCH",
+    "01076533": "DEEP LEARNING",
+    "01076627": "ICT SECURITY ARCHITECTURE AND MANAGEMENT",
+    "01076628": "INFORMATION TECHNOLOGY SECURITY ASSESSMENT",
+    "01076629": "BASIC PENETRATION TESTING AND ETHICAL HACKING",
+    "01076636": "OFFENSIVE CYBER SECURITY",
+    "01076631": "SOFTWARE DEFINED NETWORKING",
+    "01076632": "WIRELESS NETWORK TECHNOLOGY",
+    "01076635": "IP SWITCHED NETWORKS",
+    "01076584": "COMPUTER SIMULATION",
+    "01076592": "ENTREPRENEURSHIP AND THE ENGINEER",
+    "01076422": "IT ENTREPRENEURSHIP AND MANAGEMENT",
+    "01076423": "STRATEGIC PLANNING USING BOARD AND CARD GAME",
+    "01076577": "IT PROJECT MANAGEMENT"
+  },
+  "categories": [
+    {
+      "id": "gened_foundation",
+      "name": "GenEd – Foundation (วิชาพื้นฐาน)",
+      "group": "GenEd",
+      "requiredCredits": 6,
+      "mode": "prefix-pool",
+      "prefix": "90",
+      "knownCourses": ["90641001", "90642999", "90641002", "90641007", "90641003"],
+      "note": "Fixed university foundation courses (Charm School, Digital Intelligence/Citizen, Sports, etc.). Codes vary by GenEd catalog version; matched by 90-prefix up to the credit cap."
+    },
+    {
+      "id": "gened_language",
+      "name": "GenEd – Language & Communication (ภาษาและการสื่อสาร)",
+      "group": "GenEd",
+      "requiredCredits": 9,
+      "mode": "prefix-pool",
+      "prefix": "90",
+      "mandatoryCourses": ["90644007", "90644008"],
+      "knownCourses": ["90644007", "90644008", "90644012", "90644057", "90644062"],
+      "note": "Foundation English 1 & 2 are mandatory; the remaining 3 credits are a language elective."
+    },
+    {
+      "id": "gened_faculty",
+      "name": "GenEd – Faculty-required (วิชาตามเกณฑ์ของคณะ)",
+      "group": "GenEd",
+      "requiredCredits": 3,
+      "mode": "all-of",
+      "courses": ["90642036", "90642118"],
+      "note": "Reduced from 9 to 3: Pre-Activities for Engineers (1) + Application Software for Business (2)."
+    },
+    {
+      "id": "gened_elective",
+      "name": "GenEd – Elective (วิชาเลือก GenEd)",
+      "group": "GenEd",
+      "requiredCredits": 12,
+      "mode": "prefix-pool",
+      "prefix": "90",
+      "note": "Any 90xxxxxx course not consumed by the fixed GenEd buckets. Absorbed the 6 credits moved out of Faculty-required."
+    },
+
+    {
+      "id": "ce_core",
+      "name": "CE Core (วิชาแกน)",
+      "group": "Major",
+      "requiredCredits": 30,
+      "mode": "all-of",
+      "courses": [
+        "01076140", "01076141", "01076032", "01076253",
+        "01076101", "01076103", "01076104", "01076107", "01076108",
+        "01076011", "01076012", "01006004", "01076016"
+      ]
+    },
+    {
+      "id": "ce_required",
+      "name": "CE Required (วิชาเฉพาะด้าน บังคับ)",
+      "group": "Major",
+      "requiredCredits": 43,
+      "mode": "all-of",
+      "courses": [
+        "01076263", "01076105", "01076106", "01076109", "01076110",
+        "01076034", "01076119", "01076120", "01076121", "01076116",
+        "01076117", "01076040", "01076041", "01076118", "01076112",
+        "01076113", "01076114", "01076115", "01076050", "01076051"
+      ]
+    },
+    {
+      "id": "ce_compulsory",
+      "name": "CE Compulsory-elective (บังคับเลือก)",
+      "group": "Major",
+      "requiredCredits": 9,
+      "mode": "tracks",
+      "minFullTracks": 1,
+      "tracks": {
+        "embedded_iot": ["01076052", "01076053"],
+        "software_dev": ["01076035", "01076036", "01076037"],
+        "infra_network": ["01076042", "01076043", "01076044"]
+      },
+      "note": "Complete at least 1 full track (6 cr) plus >=3 more credits from other tracks, total 9. Leftover track courses can spill into Major-elective."
+    },
+    {
+      "id": "ce_alt_study",
+      "name": "CE Alternative-study (วิชาการศึกษาทางเลือก)",
+      "group": "Major",
+      "requiredCredits": 6,
+      "mode": "one-of-paths",
+      "paths": {
+        "project": ["01076311", "01076312"],
+        "cooperative": ["01006029"],
+        "overseas": ["01006005"]
+      },
+      "note": "Pick exactly one path: Project 1+2, OR Co-operative Education, OR Overseas Training."
+    },
+    {
+      "id": "ce_major_elective",
+      "name": "CE Major-elective (วิชาเลือกเฉพาะสาขา)",
+      "group": "Major",
+      "requiredCredits": 12,
+      "mode": "pool",
+      "courses": [
+        "01076411", "01076418", "01076420", "01076421", "01076414",
+        "01076513", "01076564", "01076568", "01076589", "01076599",
+        "01076596", "01076558", "01076559", "01076560",
+        "01076574", "01076585", "01076634", "01076598",
+        "01076567", "01076566", "01076583", "01076597",
+        "01076532", "01076582", "01076595", "01076533",
+        "01076627", "01076628", "01076629", "01076636",
+        "01076631", "01076632", "01076635", "01076584",
+        "01076592", "01076422", "01076423", "01076577"
+      ],
+      "allowSpillFrom": ["ce_compulsory"],
+      "note": "4 courses (3 cr each). Leftover compulsory-elective courses may also count here."
+    },
+
+    {
+      "id": "free_elective",
+      "name": "Free Elective (วิชาเลือกเสรี)",
+      "group": "Free",
+      "requiredCredits": 6,
+      "mode": "any",
+      "note": "Any passed KMITL course not consumed by another category."
+    }
+  ]
+}

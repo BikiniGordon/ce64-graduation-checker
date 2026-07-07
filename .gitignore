@@ -1,0 +1,4 @@
+.claude/
+*.xlsx
+*.pdf
+.DS_Store
