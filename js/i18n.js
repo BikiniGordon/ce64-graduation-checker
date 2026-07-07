@@ -2,7 +2,7 @@
 
 const I18N = {
   en: {
-    headerTitle: '🎓 CE KMITL — Graduation Checker',
+    headerTitle: '🎓 CE KMITL — Graduation Checker (2564 Syllabus version)',
     sub: 'Upload your unofficial transcript PDF to see what you still need to graduate. <strong>Everything runs in your browser — nothing is uploaded.</strong>',
     disclaimer: '⚠️ Unofficial reference tool for the <strong>Computer Engineering curriculum พ.ศ. 2564 (CE64) only</strong>. Course lists and rules were transcribed by hand and may contain mistakes — always double-check the results against the official syllabus and your academic advisor before making enrollment decisions.',
 
@@ -77,7 +77,7 @@ const I18N = {
     altPathOverseas: 'Overseas Training',
   },
   th: {
-    headerTitle: '🎓 CE KMITL — เครื่องมือตรวจสอบการจบการศึกษา',
+    headerTitle: '🎓 CE KMITL — เครื่องมือตรวจสอบการจบการศึกษา (ฉบับหลักสูตร 2564)',
     sub: 'อัปโหลดใบแสดงผลการเรียน (unofficial transcript) ของคุณ เพื่อดูว่ายังต้องลงทะเบียนอะไรอีกจึงจะจบการศึกษา <strong>ทุกอย่างประมวลผลในเบราว์เซอร์ของคุณ — ไม่มีการอัปโหลดข้อมูลไปที่ใด</strong>',
     disclaimer: '⚠️ เครื่องมืออ้างอิงแบบไม่เป็นทางการ สำหรับ <strong>หลักสูตรวิศวกรรมคอมพิวเตอร์ พ.ศ. 2564 (CE64) เท่านั้น</strong> รายวิชาและกฎเกณฑ์ถูกคัดลอกด้วยมือและอาจมีข้อผิดพลาด — โปรดตรวจสอบผลลัพธ์กับหลักสูตรฉบับทางการและอาจารย์ที่ปรึกษาก่อนตัดสินใจลงทะเบียนเรียนเสมอ',
 
