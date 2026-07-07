@@ -113,7 +113,8 @@
       "mode": "prefix-pool",
       "prefix": "90",
       "knownCourses": ["90641001", "90642999", "90641002", "90641007", "90641003"],
-      "note": "Fixed university foundation courses (Charm School, Digital Intelligence/Citizen, Sports, etc.). Codes vary by GenEd catalog version; matched by 90-prefix up to the credit cap."
+      "note": "Fixed university foundation courses (Charm School, Digital Intelligence/Citizen, Sports, etc.). Codes vary by GenEd catalog version; matched by 90-prefix up to the credit cap.",
+      "noteTh": "วิชาพื้นฐานของสถาบัน (โรงเรียนสร้างเสน่ห์, ความฉลาดทางดิจิทัล/พลเมืองดิจิทัล, กีฬา ฯลฯ) รหัสวิชาอาจแตกต่างกันตามรุ่นหลักสูตรศึกษาทั่วไป จับคู่ด้วยรหัสขึ้นต้น 90 จนครบหน่วยกิต"
     },
     {
       "id": "gened_language",
@@ -124,7 +125,8 @@
       "prefix": "90",
       "mandatoryCourses": ["90644007", "90644008"],
       "knownCourses": ["90644007", "90644008", "90644012", "90644057", "90644062"],
-      "note": "Foundation English 1 & 2 are mandatory; the remaining 3 credits are a language elective."
+      "note": "Foundation English 1 & 2 are mandatory; the remaining 3 credits are a language elective.",
+      "noteTh": "ภาษาอังกฤษพื้นฐาน 1 และ 2 เป็นวิชาบังคับ ส่วนอีก 3 หน่วยกิตที่เหลือเป็นวิชาเลือกด้านภาษา"
     },
     {
       "id": "gened_faculty",
@@ -133,7 +135,8 @@
       "requiredCredits": 3,
       "mode": "all-of",
       "courses": ["90642036", "90642118"],
-      "note": "Reduced from 9 to 3: Pre-Activities for Engineers (1) + Application Software for Business (2)."
+      "note": "Reduced from 9 to 3: Pre-Activities for Engineers (1) + Application Software for Business (2).",
+      "noteTh": "ลดจาก 9 เหลือ 3 หน่วยกิต: เตรียมความพร้อมสำหรับวิศวกร (1) + โปรแกรมสำเร็จรูปทางธุรกิจ (2)"
     },
     {
       "id": "gened_elective",
@@ -142,7 +145,8 @@
       "requiredCredits": 12,
       "mode": "prefix-pool",
       "prefix": "90",
-      "note": "Any 90xxxxxx course not consumed by the fixed GenEd buckets. Absorbed the 6 credits moved out of Faculty-required."
+      "note": "Any 90xxxxxx course not consumed by the fixed GenEd buckets. Absorbed the 6 credits moved out of Faculty-required.",
+      "noteTh": "วิชาใดก็ได้ที่ขึ้นต้นด้วย 90 ที่ไม่ได้ถูกใช้ในหมวดอื่นของศึกษาทั่วไปแล้ว รับ 6 หน่วยกิตที่ย้ายมาจากวิชาตามเกณฑ์ของคณะ"
     },
 
     {
@@ -182,7 +186,8 @@
         "software_dev": ["01076035", "01076036", "01076037"],
         "infra_network": ["01076042", "01076043", "01076044"]
       },
-      "note": "Complete at least 1 full track (6 cr) plus >=3 more credits from other tracks, total 9. Leftover track courses can spill into Major-elective."
+      "note": "Complete at least 1 full track (6 cr) plus >=3 more credits from other tracks, total 9. Leftover track courses can spill into Major-elective.",
+      "noteTh": "ต้องเรียนให้ครบอย่างน้อย 1 แขนงวิชาชีพ (6 หน่วยกิต) บวกกับอีกอย่างน้อย 3 หน่วยกิตจากแขนงอื่น รวม 9 หน่วยกิต วิชาแขนงที่เหลือสามารถนับเป็นวิชาเลือกเฉพาะสาขาได้"
     },
     {
       "id": "ce_alt_study",
@@ -195,7 +200,8 @@
         "cooperative": ["01006029"],
         "overseas": ["01006005"]
       },
-      "note": "Pick exactly one path: Project 1+2, OR Co-operative Education, OR Overseas Training."
+      "note": "Pick exactly one path: Project 1+2, OR Co-operative Education, OR Overseas Training.",
+      "noteTh": "เลือกเพียง 1 แนวทาง: โครงงาน 1+2 หรือ สหกิจศึกษา หรือ ฝึกงานต่างประเทศ"
     },
     {
       "id": "ce_major_elective",
@@ -215,7 +221,8 @@
         "01076592", "01076422", "01076423", "01076577"
       ],
       "allowSpillFrom": ["ce_compulsory"],
-      "note": "4 courses (3 cr each). Leftover compulsory-elective courses may also count here."
+      "note": "4 courses (3 cr each). Leftover compulsory-elective courses may also count here.",
+      "noteTh": "4 วิชา (วิชาละ 3 หน่วยกิต) วิชาบังคับเลือกที่เหลือสามารถนับรวมในหมวดนี้ได้เช่นกัน"
     },
 
     {
@@ -224,7 +231,8 @@
       "group": "Free",
       "requiredCredits": 6,
       "mode": "any",
-      "note": "Any passed KMITL course not consumed by another category."
+      "note": "Any passed KMITL course not consumed by another category.",
+      "noteTh": "วิชาใดก็ได้ของสถาบันที่สอบผ่านแล้ว และยังไม่ถูกใช้นับในหมวดอื่น"
     }
   ]
 }

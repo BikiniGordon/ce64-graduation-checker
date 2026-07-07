@@ -118,6 +118,7 @@ function baseResult(cat, assigned, extra = {}) {
     group: cat.group,
     mode: cat.mode,
     note: cat.note || null,
+    noteTh: cat.noteTh || null,
     requiredCredits: cat.requiredCredits,
     earnedCredits,
     remainingCredits: Math.max(0, cat.requiredCredits - earnedCredits),
@@ -153,9 +154,14 @@ function matchTracks(cat, avail, take) {
   const res = baseResult(cat, assigned);
   res.fullTrack = chosenFull;
   res.complete = !!chosenFull && earned >= cat.requiredCredits;
-  res.reason = res.complete ? null
-    : !chosenFull ? 'Complete at least one full professional track.'
-    : `Need ${cat.requiredCredits - earned} more credit(s) from the tracks.`;
+  if (res.complete) {
+    res.reasonKey = null;
+  } else if (!chosenFull) {
+    res.reasonKey = 'needFullTrack';
+  } else {
+    res.reasonKey = 'needMoreTrackCredits';
+    res.reasonParams = { n: cat.requiredCredits - earned };
+  }
   return res;
 }
 
@@ -171,7 +177,7 @@ function matchPaths(cat, avail, take) {
   }
   const res = baseResult(cat, []);
   res.path = null;
-  res.reason = 'Choose one path: Project 1+2, Co-operative Education, or Overseas Training.';
+  res.reasonKey = 'choosePath';
   res.pathOptions = Object.keys(cat.paths);
   return res;
 }
