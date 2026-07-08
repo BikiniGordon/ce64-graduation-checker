@@ -12,7 +12,7 @@ const I18N = {
 
     step1Title: '1 · Upload transcript (PDF)',
     dropZoneText: 'Drag &amp; drop your transcript PDF here, or <button type="button" id="pdfBtn" class="link-btn">browse</button>',
-    transcriptHelp: 'Don\'t have the PDF yet? Get your <strong>unofficial transcript</strong> from the KMITL registration system: <a href="https://www.reg.kmitl.ac.th/u_student/report_transcript_show2.php" target="_blank" rel="noopener noreferrer">reg.kmitl.ac.th/u_student/report_transcript_show2.php</a> — log in with your student ID, open the transcript page, then print it (<kbd>Ctrl/Cmd + P</kbd>) and choose <strong>Save as PDF</strong>. Upload that file here.',
+    transcriptHelp: 'Don\'t have the PDF yet? Get your <strong>unofficial transcript</strong> from the KMITL registration system: <a href="https://www.reg.kmitl.ac.th/u_student/report_transcript_show2.php" target="_blank" rel="noopener noreferrer">reg.kmitl.ac.th/u_student/report_transcript_show2.php</a> — log in with your student ID, open the transcript page, then donwload as PDF. Upload that file here.',
 
     step2Title: '2 · Review parsed courses',
     reviewHint: 'Fix any mis-read row before checking. Grade blank = in-progress.',
@@ -95,7 +95,7 @@ const I18N = {
 
     step1Title: '1 · อัปโหลดใบแสดงผลการเรียน (PDF)',
     dropZoneText: 'ลากไฟล์ PDF ใบแสดงผลการเรียนมาวางที่นี่ หรือ <button type="button" id="pdfBtn" class="link-btn">เลือกไฟล์</button>',
-    transcriptHelp: 'ยังไม่มีไฟล์ PDF ใช่ไหม? ดาวน์โหลด<strong>ใบแสดงผลการเรียนแบบไม่เป็นทางการ</strong>ได้จากระบบทะเบียนของ สจล.: <a href="https://www.reg.kmitl.ac.th/u_student/report_transcript_show2.php" target="_blank" rel="noopener noreferrer">reg.kmitl.ac.th/u_student/report_transcript_show2.php</a> — เข้าสู่ระบบด้วยรหัสนักศึกษา เปิดหน้าใบแสดงผลการเรียน แล้วสั่งพิมพ์ (<kbd>Ctrl/Cmd + P</kbd>) และเลือก <strong>บันทึกเป็น PDF (Save as PDF)</strong> จากนั้นอัปโหลดไฟล์นั้นที่นี่',
+    transcriptHelp: 'ยังไม่มีไฟล์ PDF ใช่ไหม? ดาวน์โหลด<strong>ใบแสดงผลการเรียนแบบไม่เป็นทางการ</strong>ได้จากระบบทะเบียนของ สจล.: <a href="https://www.reg.kmitl.ac.th/u_student/report_transcript_show2.php" target="_blank" rel="noopener noreferrer">reg.kmitl.ac.th/u_student/report_transcript_show2.php</a> — เข้าสู่ระบบด้วยรหัสนักศึกษา เปิดหน้าใบแสดงผลการเรียน แล้วดาวน์โหลดเป็น PDF จากนั้นอัปโหลดไฟล์นั้นที่นี่',
 
     step2Title: '2 · ตรวจสอบรายวิชาที่อ่านได้',
     reviewHint: 'แก้ไขแถวที่อ่านผิดก่อนตรวจสอบ ช่องเกรดว่าง = กำลังเรียนอยู่',
