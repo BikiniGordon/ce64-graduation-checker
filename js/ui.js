@@ -94,7 +94,10 @@ function onLangChange() {
 function wireUpload() {
   const zone = $('#dropZone');
   const input = $('#pdfInput');
-  $('#pdfBtn').addEventListener('click', () => input.click());
+
+  zone.addEventListener('click', (e) => {
+    if (e.target.closest('#pdfBtn')) input.click();
+  });
   input.addEventListener('change', () => input.files[0] && handlePdf(input.files[0]));
 
   ['dragenter', 'dragover'].forEach((ev) =>
