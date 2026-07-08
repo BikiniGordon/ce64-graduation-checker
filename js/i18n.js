@@ -3,11 +3,12 @@
 const I18N = {
   en: {
     headerTitle: 'CE KMITL — Graduation Checker (2564 Syllabus version)',
-    sub: 'Upload your unofficial transcript PDF to see what you still need to graduate. <strong>Everything runs in your browser — nothing is uploaded.</strong>',
+    sub: 'Upload your unofficial transcript PDF to see what you still need to graduate — and optionally auto-fill your Excel tracking checklist too. <strong>Everything runs in your browser — nothing is uploaded.</strong>',
     disclaimer: '⚠️ Unofficial reference tool for the <strong>Computer Engineering curriculum พ.ศ. 2564 (CE64) only</strong>. Course lists and rules were transcribed by hand and may contain mistakes — always double-check the results against the official syllabus and your academic advisor before making enrollment decisions.',
 
     step1Title: '1 · Upload transcript (PDF)',
     dropZoneText: 'Drag &amp; drop your transcript PDF here, or <button type="button" id="pdfBtn" class="link-btn">browse</button>',
+    transcriptHelp: 'Don\'t have the PDF yet? Get your <strong>unofficial transcript</strong> from the KMITL registration system: <a href="https://www.reg.kmitl.ac.th/u_student/report_transcript_show2.php" target="_blank" rel="noopener noreferrer">reg.kmitl.ac.th/u_student/report_transcript_show2.php</a> — log in with your student ID, open the transcript page, then print it (<kbd>Ctrl/Cmd + P</kbd>) and choose <strong>Save as PDF</strong>. Upload that file here.',
 
     step2Title: '2 · Review parsed courses',
     reviewHint: 'Fix any mis-read row before checking. Grade blank = in-progress.',
@@ -21,8 +22,8 @@ const I18N = {
     step3Title: '3 · Graduation status',
     resultHint: 'Reference for CE64 (พ.ศ. 2564) only — verify against the official syllabus before relying on this.',
 
-    step4Title: '4 · Fill your Excel checklist (optional)',
-    excelHint: 'Upload your original tracking template. We\'ll tick completed courses, fill active placeholder rows from your transcript, and skip struck-through rows. Don\'t have the template? <a href="https://docs.google.com/spreadsheets/d/1R8q71tQRTK_kbs3xTkeHaSPa9aVjujJjepePnJegGrw/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Get a copy here</a> (credit to its original author — not made by this tool).',
+    step4Title: '4 · Auto-fill your Excel checklist (optional)',
+    excelHint: 'Upload your original tracking template and we\'ll <strong>auto-fill it from your transcript</strong>: tick completed courses, fill active placeholder rows with matching courses, and skip struck-through rows — all from the same data used for the check above. Don\'t have the template? <a href="https://docs.google.com/spreadsheets/d/1R8q71tQRTK_kbs3xTkeHaSPa9aVjujJjepePnJegGrw/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Get a copy here</a> (credit to its original author — not made by this tool).',
     fillBtn: 'Fill &amp; download ▾',
 
     footer: 'Curriculum: Computer Engineering, KMITL — พ.ศ. 2564 (CE64) only · Rules editable in <code>data/curriculum.json</code> · Unofficial tool — always confirm results with the official syllabus / your advisor.',
@@ -78,11 +79,12 @@ const I18N = {
   },
   th: {
     headerTitle: 'CE KMITL — เครื่องมือตรวจสอบการจบการศึกษา (ฉบับหลักสูตร 2564)',
-    sub: 'อัปโหลดใบแสดงผลการเรียน (unofficial transcript) ของคุณ เพื่อดูว่ายังต้องลงทะเบียนอะไรอีกจึงจะจบการศึกษา <strong>ทุกอย่างประมวลผลในเบราว์เซอร์ของคุณ — ไม่มีการอัปโหลดข้อมูลไปที่ใด</strong>',
+    sub: 'อัปโหลดใบแสดงผลการเรียน (unofficial transcript) ของคุณ เพื่อดูว่ายังต้องลงทะเบียนอะไรอีกจึงจะจบการศึกษา — พร้อมกรอกเช็คลิสต์ Excel ให้อัตโนมัติได้ด้วย (ไม่บังคับ) <strong>ทุกอย่างประมวลผลในเบราว์เซอร์ของคุณ — ไม่มีการอัปโหลดข้อมูลไปที่ใด</strong>',
     disclaimer: '⚠️ เครื่องมืออ้างอิงแบบไม่เป็นทางการ สำหรับ <strong>หลักสูตรวิศวกรรมคอมพิวเตอร์ พ.ศ. 2564 (CE64) เท่านั้น</strong> รายวิชาและกฎเกณฑ์ถูกคัดลอกด้วยมือและอาจมีข้อผิดพลาด — โปรดตรวจสอบผลลัพธ์กับหลักสูตรฉบับทางการและอาจารย์ที่ปรึกษาก่อนตัดสินใจลงทะเบียนเรียนเสมอ',
 
     step1Title: '1 · อัปโหลดใบแสดงผลการเรียน (PDF)',
     dropZoneText: 'ลากไฟล์ PDF ใบแสดงผลการเรียนมาวางที่นี่ หรือ <button type="button" id="pdfBtn" class="link-btn">เลือกไฟล์</button>',
+    transcriptHelp: 'ยังไม่มีไฟล์ PDF ใช่ไหม? ดาวน์โหลด<strong>ใบแสดงผลการเรียนแบบไม่เป็นทางการ</strong>ได้จากระบบทะเบียนของ สจล.: <a href="https://www.reg.kmitl.ac.th/u_student/report_transcript_show2.php" target="_blank" rel="noopener noreferrer">reg.kmitl.ac.th/u_student/report_transcript_show2.php</a> — เข้าสู่ระบบด้วยรหัสนักศึกษา เปิดหน้าใบแสดงผลการเรียน แล้วสั่งพิมพ์ (<kbd>Ctrl/Cmd + P</kbd>) และเลือก <strong>บันทึกเป็น PDF (Save as PDF)</strong> จากนั้นอัปโหลดไฟล์นั้นที่นี่',
 
     step2Title: '2 · ตรวจสอบรายวิชาที่อ่านได้',
     reviewHint: 'แก้ไขแถวที่อ่านผิดก่อนตรวจสอบ ช่องเกรดว่าง = กำลังเรียนอยู่',
@@ -96,8 +98,8 @@ const I18N = {
     step3Title: '3 · สถานะการจบการศึกษา',
     resultHint: 'อ้างอิงสำหรับ CE64 (พ.ศ. 2564) เท่านั้น — โปรดตรวจสอบกับหลักสูตรฉบับทางการก่อนนำไปใช้จริง',
 
-    step4Title: '4 · กรอกเช็คลิสต์ Excel (ไม่บังคับ)',
-    excelHint: 'อัปโหลดไฟล์เทมเพลตติดตามผลของคุณ ระบบจะติ๊กวิชาที่เรียนผ่านแล้ว กรอกแถวที่รอเลือกวิชาจากใบแสดงผลการเรียนของคุณ และข้ามแถวที่ถูกขีดฆ่าไว้ ยังไม่มีเทมเพลต? <a href="https://docs.google.com/spreadsheets/d/1R8q71tQRTK_kbs3xTkeHaSPa9aVjujJjepePnJegGrw/edit?usp=sharing" target="_blank" rel="noopener noreferrer">ขอสำเนาได้ที่นี่</a> (เครดิตแก่ผู้สร้างต้นฉบับ — ไม่ได้สร้างโดยเครื่องมือนี้)',
+    step4Title: '4 · กรอกเช็คลิสต์ Excel ให้อัตโนมัติ (ไม่บังคับ)',
+    excelHint: 'อัปโหลดไฟล์เทมเพลตติดตามผลของคุณ แล้วระบบจะ<strong>กรอกให้อัตโนมัติจากใบแสดงผลการเรียนของคุณ</strong>: ติ๊กวิชาที่เรียนผ่านแล้ว กรอกแถวที่รอเลือกวิชาด้วยรายวิชาที่ตรงกัน และข้ามแถวที่ถูกขีดฆ่าไว้ — ใช้ข้อมูลชุดเดียวกับการตรวจสอบด้านบน ยังไม่มีเทมเพลต? <a href="https://docs.google.com/spreadsheets/d/1R8q71tQRTK_kbs3xTkeHaSPa9aVjujJjepePnJegGrw/edit?usp=sharing" target="_blank" rel="noopener noreferrer">ขอสำเนาได้ที่นี่</a> (เครดิตแก่ผู้สร้างต้นฉบับ — ไม่ได้สร้างโดยเครื่องมือนี้)',
     fillBtn: 'กรอกและดาวน์โหลด ▾',
 
     footer: 'หลักสูตร: วิศวกรรมคอมพิวเตอร์ สจล. — พ.ศ. 2564 (CE64) เท่านั้น · แก้ไขกฎเกณฑ์ได้ที่ <code>data/curriculum.json</code> · เครื่องมือไม่เป็นทางการ — โปรดยืนยันผลลัพธ์กับหลักสูตรฉบับทางการ / อาจารย์ที่ปรึกษาเสมอ',
