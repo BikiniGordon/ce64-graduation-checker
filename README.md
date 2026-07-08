@@ -13,7 +13,7 @@ what you still need to enroll in to graduate. It can also fill your Excel tracki
 
 **On your computer:**
 ```bash
-cd /Users/gat/Documents/Project/CE64
+# at the root folder
 python3 -m http.server 4173
 # open http://localhost:4173
 ```
