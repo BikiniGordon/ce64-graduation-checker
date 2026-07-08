@@ -15,17 +15,27 @@
 <body>
   <header>
     <div class="header-top">
-      <h1 data-i18n="headerTitle">CE KMITL — Graduation Checker (2564 Syllabus version)</h1>
-      <div class="lang-switch">
-        <button type="button" class="lang-btn active" data-lang="en">EN</button>
-        <button type="button" class="lang-btn" data-lang="th">ไทย</button>
+      <h1 id="headerTitleEl">CE KMITL — Graduation Checker (2564 Syllabus version)</h1>
+      <div class="header-controls">
+        <div class="version-switch">
+          <label for="curriculumSelect" data-i18n="curriculumVersionLabel">Syllabus:</label>
+          <select id="curriculumSelect">
+            <option value="2564">CE64 (พ.ศ. 2564)</option>
+            <option value="2569">CE69 (พ.ศ. 2569)</option>
+          </select>
+        </div>
+        <div class="lang-switch">
+          <button type="button" class="lang-btn active" data-lang="en">EN</button>
+          <button type="button" class="lang-btn" data-lang="th">ไทย</button>
+        </div>
       </div>
     </div>
-    <p class="sub" data-i18n="sub">Upload your unofficial transcript PDF to see what you still need to graduate.
+    <p class="sub" id="subEl">Upload your unofficial transcript PDF to see what you still need to graduate.
       <strong>Everything runs in your browser — nothing is uploaded.</strong></p>
-    <p class="disclaimer" data-i18n="disclaimer">⚠️ Unofficial reference tool for the <strong>Computer Engineering curriculum พ.ศ. 2564 (CE64) only</strong>.
+    <p class="disclaimer" id="disclaimerEl">⚠️ Unofficial reference tool for the <strong>Computer Engineering curriculum พ.ศ. 2564 (CE64) only</strong>.
       Course lists and rules were transcribed by hand and may contain mistakes — always double-check the results
       against the official syllabus and your academic advisor before making enrollment decisions.</p>
+    <p class="disclaimer new-curriculum-note hidden" id="newCurriculumNoteEl"></p>
   </header>
 
   <main>
@@ -66,7 +76,7 @@
     <!-- Step 3: results -->
     <section class="card hidden" id="resultSection">
       <h2 data-i18n="step3Title">3 · Graduation status</h2>
-      <p class="hint" data-i18n="resultHint">Reference for CE64 (พ.ศ. 2564) only — verify against the official syllabus before relying on this.</p>
+      <p class="hint" id="resultHintEl">Reference for CE64 (พ.ศ. 2564) only — verify against the official syllabus before relying on this.</p>
       <div id="overall"></div>
       <div id="categories"></div>
       <div id="extras"></div>
@@ -88,7 +98,7 @@
   </main>
 
   <footer>
-    <p data-i18n="footer">Curriculum: Computer Engineering, KMITL — พ.ศ. 2564 (CE64) only · Rules editable in <code>data/curriculum.json</code>
+    <p id="footerEl">Curriculum: Computer Engineering, KMITL — พ.ศ. 2564 (CE64) only · Rules editable in <code>data/curriculum_2564.json</code>
       · Unofficial tool — always confirm results with the official syllabus / your advisor.</p>
   </footer>
 

@@ -2,9 +2,13 @@
 
 const I18N = {
   en: {
-    headerTitle: 'CE KMITL — Graduation Checker (2564 Syllabus version)',
-    sub: 'Upload your unofficial transcript PDF to see what you still need to graduate — and optionally auto-fill your Excel tracking checklist too. <strong>Everything runs in your browser — nothing is uploaded.</strong>',
-    disclaimer: '⚠️ Unofficial reference tool for the <strong>Computer Engineering curriculum พ.ศ. 2564 (CE64) only</strong>. Course lists and rules were transcribed by hand and may contain mistakes — always double-check the results against the official syllabus and your academic advisor before making enrollment decisions.',
+    headerTitle: 'CE KMITL — Graduation Checker ({year} Syllabus version)',
+    subBase: 'Upload your unofficial transcript PDF to see what you still need to graduate.',
+    subExcelNote: 'You can also auto-fill your Excel tracking checklist.',
+    subPrivacy: 'Everything runs in your browser — nothing is uploaded.',
+    disclaimer: '⚠️ Unofficial reference tool for the <strong>Computer Engineering curriculum พ.ศ. {year} ({ver}) only</strong>. Course lists and rules were transcribed by hand and may contain mistakes — always double-check the results against the official syllabus and your academic advisor before making enrollment decisions.',
+    newCurriculumNote: '🆕 <strong>{ver} (พ.ศ. {year}) is the newest revision and has only just come into effect.</strong> It hasn\'t been battle-tested against real transcripts yet, so course codes, credit splits, and category rules are especially likely to need correction — please double- and triple-check everything against the official syllabus before relying on it.',
+    curriculumVersionLabel: 'Syllabus:',
 
     step1Title: '1 · Upload transcript (PDF)',
     dropZoneText: 'Drag &amp; drop your transcript PDF here, or <button type="button" id="pdfBtn" class="link-btn">browse</button>',
@@ -20,13 +24,13 @@ const I18N = {
     removeRowTitle: 'Remove',
 
     step3Title: '3 · Graduation status',
-    resultHint: 'Reference for CE64 (พ.ศ. 2564) only — verify against the official syllabus before relying on this.',
+    resultHint: 'Reference for {ver} (พ.ศ. {year}) only — verify against the official syllabus before relying on this.',
 
     step4Title: '4 · Auto-fill your Excel checklist (optional)',
     excelHint: 'Upload your original tracking template and we\'ll <strong>auto-fill it from your transcript</strong>: tick completed courses, fill active placeholder rows with matching courses, and skip struck-through rows — all from the same data used for the check above. Don\'t have the template? <a href="https://docs.google.com/spreadsheets/d/1R8q71tQRTK_kbs3xTkeHaSPa9aVjujJjepePnJegGrw/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Get a copy here</a> (credit to its original author — not made by this tool).',
     fillBtn: 'Fill &amp; download ▾',
 
-    footer: 'Curriculum: Computer Engineering, KMITL — พ.ศ. 2564 (CE64) only · Rules editable in <code>data/curriculum.json</code> · Unofficial tool — always confirm results with the official syllabus / your advisor.',
+    footer: 'Curriculum: Computer Engineering, KMITL — พ.ศ. {year} ({ver}) only · Rules editable in <code>data/{file}</code> · Unofficial tool — always confirm results with the official syllabus / your advisor.',
 
     failedToLoadCurriculum: 'Failed to load curriculum rules: {msg}',
     readingFile: 'Reading {name} …',
@@ -42,9 +46,9 @@ const I18N = {
     sanityOk: 'Sanity check ✓ — computed {a} earned credits matches the transcript\'s printed total ({b}).',
     sanityWarn: 'Sanity check ⚠ — computed {a} earned credits vs transcript\'s printed {b}. Some rows may be mis-parsed; review the table above.',
 
-    groupGenEd: 'General Education (30)',
-    groupMajor: 'Major — วิชาเฉพาะ (100)',
-    groupFree: 'Free Elective (6)',
+    groupGenEd: 'General Education ({n})',
+    groupMajor: 'Major — วิชาเฉพาะ ({n})',
+    groupFree: 'Free Elective ({n})',
 
     pillDone: 'DONE',
     pillTodo: 'TODO',
@@ -76,11 +80,18 @@ const I18N = {
     altPathProject: 'Project 1 + 2',
     altPathCooperative: 'Co-operative Education',
     altPathOverseas: 'Overseas Training',
+    altPathAcademic: 'Academic (extra Specialized Elective)',
+    altPathPoolNote: 'Take 2 more courses (6 credits) from the {poolName} pool — on top of that category\'s own requirement.',
+    altPathPoolProgress: '{earned} / {required} cr total from this pool (covers both requirements)',
   },
   th: {
-    headerTitle: 'CE KMITL — เครื่องมือตรวจสอบการจบการศึกษา (ฉบับหลักสูตร 2564)',
-    sub: 'อัปโหลดใบแสดงผลการเรียน (unofficial transcript) ของคุณ เพื่อดูว่ายังต้องลงทะเบียนอะไรอีกจึงจะจบการศึกษา — พร้อมกรอกเช็คลิสต์ Excel ให้อัตโนมัติได้ด้วย (ไม่บังคับ) <strong>ทุกอย่างประมวลผลในเบราว์เซอร์ของคุณ — ไม่มีการอัปโหลดข้อมูลไปที่ใด</strong>',
-    disclaimer: '⚠️ เครื่องมืออ้างอิงแบบไม่เป็นทางการ สำหรับ <strong>หลักสูตรวิศวกรรมคอมพิวเตอร์ พ.ศ. 2564 (CE64) เท่านั้น</strong> รายวิชาและกฎเกณฑ์ถูกคัดลอกด้วยมือและอาจมีข้อผิดพลาด — โปรดตรวจสอบผลลัพธ์กับหลักสูตรฉบับทางการและอาจารย์ที่ปรึกษาก่อนตัดสินใจลงทะเบียนเรียนเสมอ',
+    headerTitle: 'CE KMITL — เครื่องมือตรวจสอบการจบการศึกษา (ฉบับหลักสูตร {year})',
+    subBase: 'อัปโหลดใบแสดงผลการเรียน (unofficial transcript) ของคุณ เพื่อดูว่ายังต้องลงทะเบียนอะไรอีกจึงจะจบการศึกษา',
+    subExcelNote: 'พร้อมกรอกเช็คลิสต์ Excel ให้อัตโนมัติได้ด้วย (ไม่บังคับ)',
+    subPrivacy: 'ทุกอย่างประมวลผลในเบราว์เซอร์ของคุณ — ไม่มีการอัปโหลดข้อมูลไปที่ใด',
+    disclaimer: '⚠️ เครื่องมืออ้างอิงแบบไม่เป็นทางการ สำหรับ <strong>หลักสูตรวิศวกรรมคอมพิวเตอร์ พ.ศ. {year} ({ver}) เท่านั้น</strong> รายวิชาและกฎเกณฑ์ถูกคัดลอกด้วยมือและอาจมีข้อผิดพลาด — โปรดตรวจสอบผลลัพธ์กับหลักสูตรฉบับทางการและอาจารย์ที่ปรึกษาก่อนตัดสินใจลงทะเบียนเรียนเสมอ',
+    newCurriculumNote: '🆕 <strong>{ver} (พ.ศ. {year}) เป็นหลักสูตรฉบับล่าสุดที่เพิ่งเริ่มใช้</strong> ยังไม่เคยผ่านการตรวจสอบกับใบแสดงผลการเรียนจริง จึงมีโอกาสสูงที่รหัสวิชา การแบ่งหน่วยกิต และกฎเกณฑ์ต่าง ๆ จะต้องมีการแก้ไข — โปรดตรวจสอบทุกอย่างซ้ำกับหลักสูตรฉบับทางการก่อนนำไปใช้จริง',
+    curriculumVersionLabel: 'หลักสูตร:',
 
     step1Title: '1 · อัปโหลดใบแสดงผลการเรียน (PDF)',
     dropZoneText: 'ลากไฟล์ PDF ใบแสดงผลการเรียนมาวางที่นี่ หรือ <button type="button" id="pdfBtn" class="link-btn">เลือกไฟล์</button>',
@@ -96,13 +107,13 @@ const I18N = {
     removeRowTitle: 'ลบ',
 
     step3Title: '3 · สถานะการจบการศึกษา',
-    resultHint: 'อ้างอิงสำหรับ CE64 (พ.ศ. 2564) เท่านั้น — โปรดตรวจสอบกับหลักสูตรฉบับทางการก่อนนำไปใช้จริง',
+    resultHint: 'อ้างอิงสำหรับ {ver} (พ.ศ. {year}) เท่านั้น — โปรดตรวจสอบกับหลักสูตรฉบับทางการก่อนนำไปใช้จริง',
 
     step4Title: '4 · กรอกเช็คลิสต์ Excel ให้อัตโนมัติ (ไม่บังคับ)',
     excelHint: 'อัปโหลดไฟล์เทมเพลตติดตามผลของคุณ แล้วระบบจะ<strong>กรอกให้อัตโนมัติจากใบแสดงผลการเรียนของคุณ</strong>: ติ๊กวิชาที่เรียนผ่านแล้ว กรอกแถวที่รอเลือกวิชาด้วยรายวิชาที่ตรงกัน และข้ามแถวที่ถูกขีดฆ่าไว้ — ใช้ข้อมูลชุดเดียวกับการตรวจสอบด้านบน ยังไม่มีเทมเพลต? <a href="https://docs.google.com/spreadsheets/d/1R8q71tQRTK_kbs3xTkeHaSPa9aVjujJjepePnJegGrw/edit?usp=sharing" target="_blank" rel="noopener noreferrer">ขอสำเนาได้ที่นี่</a> (เครดิตแก่ผู้สร้างต้นฉบับ — ไม่ได้สร้างโดยเครื่องมือนี้)',
     fillBtn: 'กรอกและดาวน์โหลด ▾',
 
-    footer: 'หลักสูตร: วิศวกรรมคอมพิวเตอร์ สจล. — พ.ศ. 2564 (CE64) เท่านั้น · แก้ไขกฎเกณฑ์ได้ที่ <code>data/curriculum.json</code> · เครื่องมือไม่เป็นทางการ — โปรดยืนยันผลลัพธ์กับหลักสูตรฉบับทางการ / อาจารย์ที่ปรึกษาเสมอ',
+    footer: 'หลักสูตร: วิศวกรรมคอมพิวเตอร์ สจล. — พ.ศ. {year} ({ver}) เท่านั้น · แก้ไขกฎเกณฑ์ได้ที่ <code>data/{file}</code> · เครื่องมือไม่เป็นทางการ — โปรดยืนยันผลลัพธ์กับหลักสูตรฉบับทางการ / อาจารย์ที่ปรึกษาเสมอ',
 
     failedToLoadCurriculum: 'โหลดกฎเกณฑ์หลักสูตรไม่สำเร็จ: {msg}',
     readingFile: 'กำลังอ่าน {name} …',
@@ -118,9 +129,9 @@ const I18N = {
     sanityOk: 'ตรวจสอบความถูกต้อง ✓ — หน่วยกิตที่คำนวณได้ {a} ตรงกับยอดรวมในใบแสดงผลการเรียน ({b})',
     sanityWarn: 'ตรวจสอบความถูกต้อง ⚠ — หน่วยกิตที่คำนวณได้ {a} ไม่ตรงกับยอดในใบแสดงผลการเรียน {b} บางแถวอาจอ่านผิด โปรดตรวจสอบตารางด้านบน',
 
-    groupGenEd: 'หมวดวิชาศึกษาทั่วไป (30)',
-    groupMajor: 'หมวดวิชาเฉพาะ (100)',
-    groupFree: 'หมวดวิชาเลือกเสรี (6)',
+    groupGenEd: 'หมวดวิชาศึกษาทั่วไป ({n})',
+    groupMajor: 'หมวดวิชาเฉพาะ ({n})',
+    groupFree: 'หมวดวิชาเลือกเสรี ({n})',
 
     pillDone: 'ครบแล้ว',
     pillTodo: 'ยังไม่ครบ',
@@ -152,6 +163,9 @@ const I18N = {
     altPathProject: 'โครงงาน 1 + 2',
     altPathCooperative: 'สหกิจศึกษา',
     altPathOverseas: 'ฝึกงานต่างประเทศ',
+    altPathAcademic: 'การศึกษาเชิงวิชาการ (วิชาเลือกเฉพาะสาขาเพิ่มเติม)',
+    altPathPoolNote: 'เลือกเรียนอีก 2 วิชา (6 หน่วยกิต) จากกลุ่ม {poolName} — เพิ่มเติมจากที่ใช้ในหมวดนั้นเอง',
+    altPathPoolProgress: '{earned} / {required} หน่วยกิต รวมจากกลุ่มนี้ (ครอบคลุมทั้งสองหมวด)',
   },
 };
 

@@ -1,0 +1,197 @@
+{
+  "meta": {
+    "program": "Computer Engineering (วิศวกรรมคอมพิวเตอร์)",
+    "faculty": "Engineering, KMITL",
+    "year": "2569",
+    "shortLabel": "CE69",
+    "totalCredits": 138,
+    "excelTemplate": false,
+    "newlyIntroduced": true,
+    "notes": "New 2569-revision curriculum. GenEd reduced to 24 credits; Major raised to 108 (96 core + 6 specialized-elective + 6 alternative-study). Project 1+2 are now part of the required core (not an alt-study path) — the Academic alternative-study path instead draws 6 extra credits from the same Specialized-elective pool."
+  },
+  "codeAliases": {},
+  "passingGrades": ["A", "B+", "B", "C+", "C", "D+", "D", "S"],
+  "courseTitles": {
+    "90641004": "TEAM-PROJECT 1",
+    "90641005": "TEAM-PROJECT 2",
+    "90641006": "TEAM-PROJECT 3",
+    "90641007": "DIGITAL CITIZEN",
+    "90641008": "INTRODUCTION TO ENGLISH COMMUNICATION SKILLS",
+    "90641009": "INTERCULTURAL COMMUNICATION SKILLS IN ENGLISH 1",
+    "90641010": "INTERCULTURAL COMMUNICATION SKILLS IN ENGLISH 2",
+
+    "90642036": "PRE-ACTIVITIES FOR ENGINEERS",
+    "90642118": "APPLICATION SOFTWARE FOR BUSINESS",
+
+    "01006020": "GENERAL PHYSICS 1",
+    "01076140": "CALCULUS 1",
+    "01076141": "CALCULUS 2",
+    "01076142": "LINEAR ALGEBRA",
+    "01076253": "PROBABILITY AND STATISTICS",
+
+    "01076143": "DISCRETE STRUCTURES",
+    "01076020": "INTRODUCTION TO COMPUTER ENGINEERING",
+    "01076003": "CIRCUITS AND ELECTRONICS",
+    "01076002": "PROGRAMMING FUNDAMENTAL",
+    "01076033": "FUNDAMENTALS OF COMMUNICATION SYSTEMS",
+    "01076006": "DIGITAL SYSTEM FUNDAMENTALS",
+    "01076114": "COMPUTER ORGANIZATION AND ARCHITECTURE",
+    "01076011": "OPERATING SYSTEMS",
+    "01076049": "MICROCONTROLLER APPLICATION AND DEVELOPMENT",
+    "01076045": "OBJECT ORIENTED PROGRAMMING",
+    "01076046": "DATA STRUCTURES AND ALGORITHMS",
+    "01076263": "DATABASE SYSTEMS",
+    "01076047": "WEB APPLICATION DEVELOPMENT",
+    "01076048": "SOFTWARE DESIGN",
+    "01076034": "PRINCIPLES OF SOFTWARE DEVELOPMENT PROCESS",
+    "01076054": "COMPUTER NETWORKS",
+    "01076055": "INTERNETWORKING STANDARDS AND TECHNOLOGIES",
+    "01076118": "SYSTEM PLATFORM ADMINISTRATION",
+    "01076056": "INTRODUCTION TO CYBER SECURITY",
+    "01076641": "INTRODUCTION TO MACHINE LEARNING AND DEEP LEARNING",
+    "01076121": "THEORY OF COMPUTATION",
+    "01076038": "COMPUTER ENGINEERING, SOCIETY AND SUSTAINABILITY",
+    "01006004": "INDUSTRIAL TRAINING",
+    "01076016": "COMPUTER ENGINEERING PROJECT PREPARATION",
+    "01076311": "PROJECT 1",
+    "01076312": "PROJECT 2",
+
+    "01076420": "ADVANCED DIGITAL DESIGN USING HDL",
+    "01076052": "REAL-TIME EMBEDDED SYSTEMS",
+    "01076418": "HIGH PERFORMANCE COMPUTING",
+    "01076421": "EMBEDDED SYSTEM DESIGN",
+    "01076411": "MICRO ROBOT DEVELOPMENT",
+    "01076053": "INTERNET OF THINGS AND SMART SYSTEMS",
+    "01076513": "COMPILER CONSTRUCTION",
+    "01076564": "DESIGN AND ANALYSIS OF ALGORITHMS",
+    "01076264": "DevOps FOR SOFTWARE DEVELOPMENT",
+    "01076596": "SYSTEM REQUIREMENTS ENGINEERING",
+    "01076599": "SOFTWARE TESTING AND QUALITY ASSURANCE",
+    "01076424": "USER EXPERIENCE AND USER INTERFACE DESIGN",
+    "01076589": "ADVANCED DATABASE SYSTEMS",
+    "01076422": "IT ENTREPRENEURSHIP AND MANAGEMENT",
+    "01076615": "NETWORK OPERATION AND MANAGEMENT",
+    "01076632": "WIRELESS NETWORK TECHNOLOGY",
+    "01076635": "IP SWITCHED NETWORKS",
+    "01076637": "DISTRIBUTED SYSTEMS AND BLOCKCHAIN TECHNOLOGY",
+    "01076616": "INTRODUCTION TO CLOUD ARCHITECTURE",
+    "01076627": "ICT SECURITY ARCHITECTURE AND MANAGEMENT",
+    "01076628": "INFORMATION TECHNOLOGY SECURITY ASSESSMENT",
+    "01076629": "BASIC PENETRATION TESTING AND ETHICAL HACKING",
+    "01076598": "INTRODUCTION TO DATA ANALYTICS",
+    "01076634": "BIG DATA ARCHITECTURE",
+    "01076638": "DATA ENGINEERING",
+    "01076639": "INFORMATION RETRIEVAL AND INTELLIGENT SEARCH",
+    "01076566": "MULTIMEDIA SYSTEMS",
+    "01076582": "ARTIFICIAL INTELLIGENCE",
+    "01076642": "DEEP LEARNING",
+    "01076643": "IMAGE PROCESSING",
+    "01076644": "MULTIMODAL MACHINE LEARNING",
+    "01076648": "ARTIFICIAL INTELLIGENCE FOR EDGE COMPUTING",
+    "01076646": "LARGE LANGUAGE MODEL",
+    "01076647": "GENERATIVE MODELS",
+
+    "01006029": "CO-OPERATIVE EDUCATION",
+    "01006005": "OVERSEA TRAINING"
+  },
+  "categories": [
+    {
+      "id": "gened_identity",
+      "name": "GenEd – Institutional Identity Skills (ทักษะส่งเสริมอัตลักษณ์สถาบันฯ)",
+      "group": "GenEd",
+      "requiredCredits": 12,
+      "mode": "all-of",
+      "courses": ["90641004", "90641005", "90641006", "90641007", "90641009", "90641010"],
+      "note": "Team Project 1-3, Digital Citizen, Intercultural Communication in English 1 & 2. (The 0-credit English placement course is conditional and not counted here.)",
+      "noteTh": "โครงงานกลุ่ม 1-3, พลเมืองดิจิทัล, ทักษะการสื่อสารภาษาอังกฤษระหว่างวัฒนธรรม 1 และ 2 (วิชาปรับพื้นฐานภาษาอังกฤษ 0 หน่วยกิต เป็นเงื่อนไขเฉพาะบางคน จึงไม่นับในหมวดนี้)"
+    },
+    {
+      "id": "gened_language",
+      "name": "GenEd – Language & Communication Elective (เลือกด้านภาษาและการสื่อสาร)",
+      "group": "GenEd",
+      "requiredCredits": 3,
+      "mode": "prefix-pool",
+      "prefix": "90644",
+      "note": "Any language & communication elective course (90644xxx).",
+      "noteTh": "วิชาเลือกด้านภาษาและการสื่อสารใดก็ได้ (รหัสขึ้นต้น 90644)"
+    },
+    {
+      "id": "gened_elective",
+      "name": "GenEd – General Education Elective (เลือกหมวดวิชาศึกษาทั่วไป)",
+      "group": "GenEd",
+      "requiredCredits": 9,
+      "mode": "prefix-pool",
+      "prefix": "9064",
+      "mandatoryCourses": ["90642036", "90642118"],
+      "note": "Pre-Activities for Engineers (1) + Application Software for Business (2) are mandatory; the remaining 6 credits are any GenEd elective.",
+      "noteTh": "เตรียมความพร้อมสำหรับวิศวกร (1) + โปรแกรมคอมพิวเตอร์ประยุกต์ทางธุรกิจ (2) เป็นวิชาบังคับ ส่วนอีก 6 หน่วยกิตที่เหลือเป็นวิชาเลือกหมวดวิชาศึกษาทั่วไปใดก็ได้"
+    },
+
+    {
+      "id": "ce_core_science",
+      "name": "CE Core – Science & Mathematics (วิชาแกนทางวิทยาศาสตร์และคณิตศาสตร์)",
+      "group": "Major",
+      "requiredCredits": 15,
+      "mode": "all-of",
+      "courses": ["01006020", "01076140", "01076141", "01076142", "01076253"]
+    },
+    {
+      "id": "ce_core_eng",
+      "name": "CE Core – Computer Engineering (วิชาแกนทางวิศวกรรมคอมพิวเตอร์)",
+      "group": "Major",
+      "requiredCredits": 81,
+      "mode": "all-of",
+      "courses": [
+        "01076143", "01076020", "01076003", "01076002", "01076033",
+        "01076006", "01076114", "01076011", "01076049", "01076045",
+        "01076046", "01076263", "01076047", "01076048", "01076034",
+        "01076054", "01076055", "01076118", "01076056", "01076641",
+        "01076121", "01076038", "01006004", "01076016", "01076311",
+        "01076312"
+      ],
+      "note": "Includes Project 1 & 2 — under this curriculum they're part of the required core, not an alternative-study option.",
+      "noteTh": "รวมโครงงาน 1 และ 2 — ในหลักสูตรนี้ทั้งสองวิชาเป็นวิชาแกนบังคับ ไม่ใช่ตัวเลือกในกลุ่มวิชาการศึกษาทางเลือก"
+    },
+    {
+      "id": "ce_specialized_elective",
+      "name": "CE Specialized Elective (วิชาเลือกเฉพาะสาขา)",
+      "group": "Major",
+      "requiredCredits": 6,
+      "mode": "pool",
+      "courses": [
+        "01076420", "01076052", "01076418", "01076421", "01076411", "01076053",
+        "01076513", "01076564", "01076264", "01076596", "01076599", "01076424", "01076589", "01076422",
+        "01076615", "01076632", "01076635", "01076637", "01076616",
+        "01076627", "01076628", "01076629",
+        "01076598", "01076634", "01076638", "01076639", "01076566",
+        "01076582", "01076642", "01076643", "01076644", "01076648", "01076646", "01076647"
+      ],
+      "note": "2 courses (3 cr each) from any specialized-elective group: Hardware & Architecture, Software Development, System Infrastructure, Cyber Security, Data Engineering, or Machine Intelligence.",
+      "noteTh": "เลือกเรียน 2 วิชา (วิชาละ 3 หน่วยกิต) จากกลุ่มใดก็ได้: ฮาร์ดแวร์และสถาปัตยกรรมคอมพิวเตอร์, การพัฒนาซอฟต์แวร์, โครงสร้างพื้นฐานของระบบ, ความปลอดภัยไซเบอร์, วิศวกรรมข้อมูล หรือเครื่องจักรอัจฉริยะ"
+    },
+    {
+      "id": "ce_alt_study",
+      "name": "CE Alternative-study (วิชาการศึกษาทางเลือก)",
+      "group": "Major",
+      "requiredCredits": 6,
+      "mode": "one-of-paths",
+      "paths": {
+        "academic": { "poolFrom": "ce_specialized_elective" },
+        "cooperative": ["01006029"],
+        "overseas": ["01006005"]
+      },
+      "note": "Pick exactly one path: Academic (2 more Specialized-elective courses, same pool as above), OR Co-operative Education, OR Overseas Training.",
+      "noteTh": "เลือกเพียง 1 แนวทาง: การศึกษาเชิงวิชาการ (เรียนวิชาเลือกเฉพาะสาขาเพิ่มอีก 2 วิชา จากกลุ่มเดียวกับข้างต้น) หรือ สหกิจศึกษา หรือ ฝึกงานต่างประเทศ"
+    },
+
+    {
+      "id": "free_elective",
+      "name": "Free Elective (วิชาเลือกเสรี)",
+      "group": "Free",
+      "requiredCredits": 6,
+      "mode": "any",
+      "note": "Any passed KMITL course not consumed by another category.",
+      "noteTh": "วิชาใดก็ได้ของสถาบันที่สอบผ่านแล้ว และยังไม่ถูกใช้นับในหมวดอื่น"
+    }
+  ]
+}

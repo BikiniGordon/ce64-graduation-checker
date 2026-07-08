@@ -33,6 +33,12 @@ header {
 }
 .header-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 header h1 { margin: 0 0 6px; font-size: 26px; }
+.header-controls { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; flex-shrink: 0; }
+.version-switch { display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--muted); }
+.version-switch select {
+  background: var(--card-2); color: var(--text); border: 1px solid var(--border);
+  border-radius: 6px; padding: 5px 8px; font-size: 12.5px; cursor: pointer;
+}
 .lang-switch { display: flex; gap: 4px; flex-shrink: 0; }
 .lang-btn {
   background: var(--card-2); color: var(--muted); border: 1px solid var(--border);
@@ -43,6 +49,10 @@ header h1 { margin: 0 0 6px; font-size: 26px; }
 .disclaimer {
   margin: 12px 0 0; padding: 10px 14px; font-size: 13px; color: var(--warn);
   background: rgba(224,179,65,.1); border: 1px solid rgba(224,179,65,.35); border-radius: 8px;
+}
+.disclaimer.new-curriculum-note {
+  color: var(--danger);
+  background: rgba(224,106,106,.1); border-color: rgba(224,106,106,.35);
 }
 
 main { max-width: 960px; margin: 0 auto; padding: 12px 24px 48px; }
@@ -150,3 +160,5 @@ td.credit-cell input, td.grade-cell input { width: 56px; }
 
 footer { max-width: 960px; margin: 0 auto; padding: 0 24px 40px; color: var(--muted); font-size: 12px; }
 footer code { background: var(--card); padding: 1px 5px; border-radius: 4px; }
+
+a {color: var(--accent); text-decoration: underline;}

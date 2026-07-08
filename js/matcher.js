@@ -60,14 +60,16 @@ function runMatcher(courses, curriculum) {
     results[cat.id] = matchTracks(cat, avail, take);
   }
 
-  // ---- Stage 3: alternative-study paths ----
-  for (const cat of cats.filter((c) => c.mode === 'one-of-paths')) {
-    results[cat.id] = matchPaths(cat, avail, take);
-  }
-
-  // ---- Stage 4: major-elective pool (+ spill from compulsory leftovers) ----
+  // ---- Stage 3: major/specialized-elective pool (+ spill from compulsory leftovers) ----
+  // Runs before one-of-paths so a pool-backed alt-study path (e.g. "2 more
+  // specialized electives") only sees courses left over after this pool's own quota.
   for (const cat of cats.filter((c) => c.mode === 'pool')) {
     results[cat.id] = matchPool(cat, curriculum, unconsumed, take);
+  }
+
+  // ---- Stage 4: alternative-study paths ----
+  for (const cat of cats.filter((c) => c.mode === 'one-of-paths')) {
+    results[cat.id] = matchPaths(cat, avail, take, unconsumed, curriculum);
   }
 
   // ---- Stage 5: prefix pools (GenEd foundation/language/elective) ----
@@ -165,14 +167,36 @@ function matchTracks(cat, avail, take) {
   return res;
 }
 
-function matchPaths(cat, avail, take) {
-  for (const [name, codes] of Object.entries(cat.paths)) {
-    if (codes.every((code) => avail(code))) {
-      const assigned = codes.map((code) => { const c = avail(code); take(c, cat.id); return c; });
-      const res = baseResult(cat, assigned);
-      res.path = name;
-      res.complete = res.earnedCredits >= cat.requiredCredits;
-      return res;
+function matchPaths(cat, avail, take, unconsumed, curriculum) {
+  for (const [name, def] of Object.entries(cat.paths)) {
+    if (Array.isArray(def)) {
+      // Fixed course list — every code in the path must be available.
+      if (def.every((code) => avail(code))) {
+        const assigned = def.map((code) => { const c = avail(code); take(c, cat.id); return c; });
+        const res = baseResult(cat, assigned);
+        res.path = name;
+        res.complete = res.earnedCredits >= cat.requiredCredits;
+        return res;
+      }
+    } else if (def && def.poolFrom) {
+      // Pool-backed path (e.g. "N more credits from the same elective pool as
+      // another category") — satisfied once enough leftover pool credits exist.
+      const poolCat = curriculum.categories.find((c) => c.id === def.poolFrom);
+      const eligible = new Set(poolCat.courses);
+      const candidates = unconsumed().filter((c) => eligible.has(c.code));
+      const available = candidates.reduce((s, c) => s + c.credit, 0);
+      if (available >= cat.requiredCredits) {
+        const assigned = [];
+        let earned = 0;
+        for (const c of candidates) {
+          if (earned >= cat.requiredCredits) break;
+          take(c, cat.id); assigned.push(c); earned += c.credit;
+        }
+        const res = baseResult(cat, assigned);
+        res.path = name;
+        res.complete = true;
+        return res;
+      }
     }
   }
   const res = baseResult(cat, []);
