@@ -101,13 +101,18 @@ td input {
 }
 td.code-cell input { width: 90px; }
 td.credit-cell input, td.grade-cell input { width: 56px; }
+td.grade-cell select {
+  width: 100%; background: var(--card-2); border: 1px solid var(--border);
+  color: var(--text); border-radius: 6px; padding: 4px 6px; font-size: 13px;
+}
 .del-btn { background: none; border: none; color: var(--danger); font-size: 16px; }
 
 .col-toggle-btn { margin-bottom: 10px; font-size: 12.5px; padding: 6px 12px; }
 #courseTable.title-collapsed th.title-col,
 #courseTable.title-collapsed td.title-col { display: none; }
 
-.row-actions { display: flex; justify-content: space-between; margin-top: 14px; gap: 10px; }
+.row-actions { display: flex; justify-content: space-between; margin-top: 14px; gap: 10px; flex-wrap: wrap; }
+.row-actions-right { display: flex; gap: 10px; flex-wrap: wrap; }
 
 /* overall progress */
 .overall-bar { margin-bottom: 18px; }
@@ -162,3 +167,21 @@ footer { max-width: 960px; margin: 0 auto; padding: 0 24px 40px; color: var(--mu
 footer code { background: var(--card); padding: 1px 5px; border-radius: 4px; }
 
 a {color: var(--accent); text-decoration: underline;}
+
+/* Grade Planner page */
+.gp-back-link { display: inline-block; margin-bottom: 10px; font-size: 13px; }
+.gp-stat-grid { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 4px; }
+.gp-stat { flex: 1 1 180px; background: var(--card-2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 12px 14px; }
+.gp-stat-label { font-size: 12.5px; color: var(--muted); margin-bottom: 4px; }
+.gp-stat-value { font-size: 24px; font-weight: 700; }
+.gp-filled-count { font-size: 12.5px; color: var(--muted); margin-top: 10px; }
+.gp-target-row { display: flex; align-items: flex-end; gap: 12px; flex-wrap: wrap; margin-top: 4px; }
+.gp-target-row label { font-size: 13px; color: var(--muted); display: flex; flex-direction: column; gap: 6px; }
+.gp-target-row input {
+  background: var(--card-2); color: var(--text); border: 1px solid var(--border);
+  border-radius: 6px; padding: 6px 10px; font-size: 14px; width: 120px;
+}
+.gp-target-result { margin-top: 12px; font-size: 14px; }
+.gp-target-result .gp-req-gpa { font-size: 22px; font-weight: 700; }
+.gp-empty-card { text-align: center; padding: 40px 20px; }

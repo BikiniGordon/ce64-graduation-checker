@@ -83,6 +83,41 @@ const I18N = {
     altPathAcademic: 'Academic (extra Specialized Elective)',
     altPathPoolNote: 'Take 2 more courses (6 credits) from the {poolName} pool — on top of that category\'s own requirement.',
     altPathPoolProgress: '{earned} / {required} cr total from this pool (covers both requirements)',
+
+    gradePlannerBtn: 'Grade Planner ▸',
+
+    gpPageTitle: 'Grade Planner',
+    gpBackLink: '← Back to Graduation Checker',
+    gpSub: 'Simulate grades for your still-ungraded courses and see your projected GPA. All GPA values are rounded to 3 decimal places.',
+    gpEmptyTitle: 'No transcript data found',
+    gpEmptyText: 'Go back to the Graduation Checker, upload your transcript, and click "Grade Planner ▸" from the review step.',
+    gpEmptyLink: '← Go upload your transcript',
+
+    gpPriorTitle: 'Your GPA so far',
+    gpPriorStat: '{gpa} GPA · {credits} graded credit(s)',
+    gpPriorNone: 'No graded courses found yet — projections below will be based on this semester alone.',
+    gpExcludedNote: '{n} course(s) with non-GPA grades (S/U/W/I) were excluded from all calculations below.',
+
+    gpSimTitle: 'This semester — simulate your grades',
+    gpSimHint: 'These are the courses on your transcript with no grade posted yet. Pick a grade for each to see your projected GPA.',
+    thGradeSim: 'Simulated grade',
+    gpAddRowBtn: '+ Add course',
+    gpGradeUnset: '— unset —',
+
+    gpResultsTitle: 'Projected results',
+    gpFilledCount: '{filled} of {total} course(s) set',
+    gpSemesterGpa: 'This semester GPA',
+    gpCumulativeGpa: 'Projected cumulative GPA',
+    gpNoDataYet: '—',
+
+    gpTargetTitle: 'Or work backwards: set a target cumulative GPA',
+    gpTargetHint: 'Enter the cumulative GPA you want to have after this semester — we\'ll calculate the average grade you need this semester to get there.',
+    gpTargetLabel: 'Target cumulative GPA',
+    gpTargetNeedCourses: 'Add your in-progress courses first.',
+    gpRequiredGpa: 'You need at least a {gpa} GPA this semester.',
+    gpRequiredHint: '≈ {letter} average or better',
+    gpNotAchievable: 'Not achievable this semester — even straight A\'s only get you to a {maxGpa} cumulative GPA.',
+    gpAlreadySecured: 'Already secured — any passing grade(s) this semester will keep you at or above this target.',
   },
   th: {
     headerTitle: 'CE KMITL — เครื่องมือตรวจสอบการจบการศึกษา (ฉบับหลักสูตร {year})',
@@ -166,6 +201,41 @@ const I18N = {
     altPathAcademic: 'การศึกษาเชิงวิชาการ (วิชาเลือกเฉพาะสาขาเพิ่มเติม)',
     altPathPoolNote: 'เลือกเรียนอีก 2 วิชา (6 หน่วยกิต) จากกลุ่ม {poolName} — เพิ่มเติมจากที่ใช้ในหมวดนั้นเอง',
     altPathPoolProgress: '{earned} / {required} หน่วยกิต รวมจากกลุ่มนี้ (ครอบคลุมทั้งสองหมวด)',
+
+    gradePlannerBtn: 'วางแผนเกรด ▸',
+
+    gpPageTitle: 'ตัววางแผนเกรด',
+    gpBackLink: '← กลับไปหน้าตรวจสอบการจบการศึกษา',
+    gpSub: 'จำลองเกรดสำหรับวิชาที่ยังไม่มีเกรด แล้วดูเกรดเฉลี่ยที่คาดการณ์ไว้ ตัวเลขเกรดเฉลี่ยทั้งหมดปัดเศษเป็นทศนิยม 3 ตำแหน่ง',
+    gpEmptyTitle: 'ไม่พบข้อมูลใบแสดงผลการเรียน',
+    gpEmptyText: 'กลับไปที่หน้าตรวจสอบการจบการศึกษา อัปโหลดใบแสดงผลการเรียน แล้วกด "วางแผนเกรด ▸" จากขั้นตอนตรวจสอบรายวิชา',
+    gpEmptyLink: '← ไปอัปโหลดใบแสดงผลการเรียน',
+
+    gpPriorTitle: 'เกรดเฉลี่ยของคุณจนถึงตอนนี้',
+    gpPriorStat: 'เกรดเฉลี่ย {gpa} · {credits} หน่วยกิตที่มีเกรดแล้ว',
+    gpPriorNone: 'ยังไม่พบวิชาที่มีเกรด — การคาดการณ์ด้านล่างจะอิงจากภาคเรียนนี้เพียงอย่างเดียว',
+    gpExcludedNote: 'มี {n} วิชาที่มีเกรดแบบไม่นับเกรดเฉลี่ย (S/U/W/I) ถูกตัดออกจากการคำนวณทั้งหมดด้านล่าง',
+
+    gpSimTitle: 'ภาคเรียนนี้ — จำลองเกรดของคุณ',
+    gpSimHint: 'นี่คือวิชาในใบแสดงผลการเรียนของคุณที่ยังไม่มีเกรด เลือกเกรดสำหรับแต่ละวิชาเพื่อดูเกรดเฉลี่ยที่คาดการณ์ไว้',
+    thGradeSim: 'เกรดจำลอง',
+    gpAddRowBtn: '+ เพิ่มวิชา',
+    gpGradeUnset: '— ยังไม่เลือก —',
+
+    gpResultsTitle: 'ผลลัพธ์ที่คาดการณ์',
+    gpFilledCount: 'เลือกแล้ว {filled} จาก {total} วิชา',
+    gpSemesterGpa: 'เกรดเฉลี่ยภาคเรียนนี้',
+    gpCumulativeGpa: 'เกรดเฉลี่ยสะสมที่คาดการณ์',
+    gpNoDataYet: '—',
+
+    gpTargetTitle: 'หรือคำนวณย้อนกลับ: ตั้งเป้าเกรดเฉลี่ยสะสม',
+    gpTargetHint: 'ใส่เกรดเฉลี่ยสะสมที่คุณต้องการหลังภาคเรียนนี้ — เราจะคำนวณเกรดเฉลี่ยที่ต้องได้ในภาคเรียนนี้เพื่อให้ถึงเป้าหมาย',
+    gpTargetLabel: 'เป้าหมายเกรดเฉลี่ยสะสม',
+    gpTargetNeedCourses: 'เพิ่มวิชาที่กำลังเรียนอยู่ก่อน',
+    gpRequiredGpa: 'คุณต้องได้เกรดเฉลี่ยอย่างน้อย {gpa} ในภาคเรียนนี้',
+    gpRequiredHint: '≈ เฉลี่ยระดับ {letter} ขึ้นไป',
+    gpNotAchievable: 'ไม่สามารถทำได้ในภาคเรียนนี้ — แม้ได้ A ทุกวิชาก็ได้เกรดเฉลี่ยสะสมสูงสุดเพียง {maxGpa}',
+    gpAlreadySecured: 'มั่นใจได้แล้ว — ไม่ว่าจะได้เกรดผ่านใดในภาคเรียนนี้ ก็ยังถึงเป้าหมายนี้',
   },
 };
 

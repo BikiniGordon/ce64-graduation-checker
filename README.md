@@ -31,6 +31,11 @@ Must be served over HTTP, not opened as a `file://` — the app fetches `data/cu
 5. **Fill Excel (optional, CE64 only)** → upload your tracking template; completed courses get
    ticked, active placeholder rows get filled from your transcript, and struck-through rows
    are skipped.
+6. **Grade Planner (optional)** → from the review step, click "Grade Planner ▸" to open a
+   separate page ([grade-planner.html](grade-planner.html)) that pulls in your still-ungraded
+   courses, lets you simulate a grade for each one, and shows your projected semester and
+   cumulative GPA live (all figures to 3 decimal places). You can also enter a target cumulative
+   GPA and it'll back-calculate the average grade you'd need this semester to reach it.
 
 ## Note
 

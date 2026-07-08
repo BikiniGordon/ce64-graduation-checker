@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grade Planner — CE KMITL</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header>
+    <a class="gp-back-link" href="index.html" data-i18n="gpBackLink">← Back to Graduation Checker</a>
+    <div class="header-top">
+      <h1 data-i18n="gpPageTitle">Grade Planner</h1>
+      <div class="header-controls">
+        <div class="lang-switch">
+          <button type="button" class="lang-btn active" data-lang="en">EN</button>
+          <button type="button" class="lang-btn" data-lang="th">ไทย</button>
+        </div>
+      </div>
+    </div>
+    <p class="sub" data-i18n="gpSub">Simulate grades for your still-ungraded courses and see your projected GPA. All GPA values are rounded to 3 decimal places.</p>
+  </header>
+
+  <main>
+    <!-- Empty state (shown when there's no handed-off transcript data) -->
+    <section class="card hidden" id="gpEmptySection">
+      <div class="gp-empty-card">
+        <h2 data-i18n="gpEmptyTitle">No transcript data found</h2>
+        <p class="hint" data-i18n="gpEmptyText">Go back to the Graduation Checker, upload your transcript, and click "Grade Planner ▸" from the review step.</p>
+        <a href="index.html" data-i18n="gpEmptyLink">← Go upload your transcript</a>
+      </div>
+    </section>
+
+    <div id="gpContent" class="hidden">
+      <!-- Prior GPA -->
+      <section class="card">
+        <h2 data-i18n="gpPriorTitle">Your GPA so far</h2>
+        <div id="gpPriorStat"></div>
+        <p class="hint hidden" id="gpExcludedNote"></p>
+      </section>
+
+      <!-- Simulation table -->
+      <section class="card">
+        <h2 data-i18n="gpSimTitle">This semester — simulate your grades</h2>
+        <p class="hint" data-i18n="gpSimHint">These are the courses on your transcript with no grade posted yet. Pick a grade for each to see your projected GPA.</p>
+        <div class="table-wrap">
+          <table id="gpSimTable">
+            <thead>
+              <tr><th data-i18n="thCode">Code</th><th data-i18n="thTitle">Title</th><th data-i18n="thCredit">Credit</th><th data-i18n="thGradeSim">Simulated grade</th><th></th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="row-actions">
+          <button type="button" id="gpAddRowBtn" class="secondary" data-i18n="gpAddRowBtn">+ Add course</button>
+        </div>
+      </section>
+
+      <!-- Live results -->
+      <section class="card">
+        <h2 data-i18n="gpResultsTitle">Projected results</h2>
+        <div class="gp-stat-grid">
+          <div class="gp-stat">
+            <div class="gp-stat-label" data-i18n="gpSemesterGpa">This semester GPA</div>
+            <div class="gp-stat-value" id="gpSemesterGpaValue">—</div>
+          </div>
+          <div class="gp-stat">
+            <div class="gp-stat-label" data-i18n="gpCumulativeGpa">Projected cumulative GPA</div>
+            <div class="gp-stat-value" id="gpCumulativeGpaValue">—</div>
+          </div>
+        </div>
+        <div class="gp-filled-count" id="gpFilledCount"></div>
+      </section>
+
+      <!-- Reverse: target GPA -->
+      <section class="card">
+        <h2 data-i18n="gpTargetTitle">Or work backwards: set a target cumulative GPA</h2>
+        <p class="hint" data-i18n="gpTargetHint">Enter the cumulative GPA you want to have after this semester — we'll calculate the average grade you need this semester to get there.</p>
+        <div class="gp-target-row">
+          <label>
+            <span data-i18n="gpTargetLabel">Target cumulative GPA</span>
+            <input type="number" id="gpTargetGpa" step="0.001" min="0" max="4" placeholder="3.500" />
+          </label>
+        </div>
+        <div class="gp-target-result" id="gpTargetResult"></div>
+      </section>
+    </div>
+  </main>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/gradePlanner.js"></script>
+</body>
+</html>

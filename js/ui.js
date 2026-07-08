@@ -143,10 +143,26 @@ function renderStudent(student, printedEarned) {
 function wireReview() {
   $('#addRowBtn').addEventListener('click', () => addCourseRow({ code: '', title: '', credit: '', grade: '' }));
   $('#checkBtn').addEventListener('click', runCheck);
+  $('#gradePlannerBtn').addEventListener('click', openGradePlanner);
   $('#toggleTitleBtn').addEventListener('click', () => {
     const collapsed = $('#courseTable').classList.toggle('title-collapsed');
     $('#toggleTitleBtn').textContent = t(collapsed ? 'showTitleColumn' : 'hideTitleColumn');
   });
+}
+
+// Hands the raw reviewed rows off to the Grade Planner page via localStorage
+// (no backend to pass data through, and it needs the raw grade string, not
+// curriculum-specific pass/fail classification).
+function openGradePlanner() {
+  const rows = [...$('#courseTable tbody').querySelectorAll('tr')];
+  const courses = [];
+  for (const tr of rows) {
+    const [code, title, credit, grade] = [...tr.querySelectorAll('input')].map((i) => i.value.trim());
+    if (!code) continue;
+    courses.push({ code, title, credit: parseInt(credit, 10) || 0, grade: grade.toUpperCase() });
+  }
+  localStorage.setItem('ce64_grade_planner_data', JSON.stringify(courses));
+  window.location.href = 'grade-planner.html';
 }
 
 function renderCourseTable(courses) {
