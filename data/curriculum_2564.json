@@ -3,7 +3,9 @@
     "program": "Computer Engineering (วิศวกรรมคอมพิวเตอร์)",
     "faculty": "Engineering, KMITL",
     "year": "2564",
+    "shortLabel": "CE64",
     "totalCredits": 136,
+    "excelTemplate": true,
     "notes": "Reflects the confirmed edit: GenEd Faculty-required reduced 9->3, the 6 credits moved into GenEd Elective 6->12. GenEd total still = 30."
   },
   "codeAliases": {

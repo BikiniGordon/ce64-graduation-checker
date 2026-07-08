@@ -1,12 +1,16 @@
 // ui.js — wires the pieces together. All state lives here.
 
 let CURRICULUM = null;
+let CURRICULUM_VERSION = (typeof localStorage !== 'undefined' && localStorage.getItem('ce64_curriculum_version')) || '2564';
 let MATCH = null;
 let TEMPLATE_BUFFER = null;
 let selectedAltPath = null;
 let LAST_PARSED = null; // { student, printedEarned } — for re-render on language switch
 
-const ALT_PATH_KEYS = { project: 'altPathProject', cooperative: 'altPathCooperative', overseas: 'altPathOverseas' };
+const ALT_PATH_KEYS = {
+  project: 'altPathProject', cooperative: 'altPathCooperative', overseas: 'altPathOverseas',
+  academic: 'altPathAcademic',
+};
 function altPathLabel(key) {
   return ALT_PATH_KEYS[key] ? t(ALT_PATH_KEYS[key]) : key.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 }
@@ -17,10 +21,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   applyStaticI18n();
   wireLangSwitch();
   try {
-    CURRICULUM = await fetch('data/curriculum.json').then((r) => {
-      if (!r.ok) throw new Error('curriculum.json not found (serve over http, not file://)');
-      return r.json();
-    });
+    await loadCurriculum(CURRICULUM_VERSION);
   } catch (e) {
     $('#pdfStatus').textContent = t('failedToLoadCurriculum', { msg: e.message });
     $('#pdfStatus').className = 'status error';
@@ -30,8 +31,49 @@ document.addEventListener('DOMContentLoaded', async () => {
   wireReview();
   wireExcel();
   wireAltPathPicker();
+  wireVersionSwitch();
   onLangChange(); // sync any language-dependent text that isn't covered by data-i18n
 });
+
+async function loadCurriculum(version) {
+  CURRICULUM = await fetch(`data/curriculum_${version}.json`).then((r) => {
+    if (!r.ok) throw new Error(`curriculum_${version}.json not found (serve over http, not file://)`);
+    return r.json();
+  });
+  CURRICULUM_VERSION = version;
+  if (typeof localStorage !== 'undefined') localStorage.setItem('ce64_curriculum_version', version);
+  selectedAltPath = null;
+  applyCurriculumText();
+}
+
+function wireVersionSwitch() {
+  const sel = $('#curriculumSelect');
+  sel.value = CURRICULUM_VERSION;
+  sel.addEventListener('change', async () => {
+    try {
+      await loadCurriculum(sel.value);
+      if (MATCH) runCheck(); // re-run against the new curriculum using the same reviewed table
+    } catch (e) {
+      $('#pdfStatus').className = 'status error';
+      $('#pdfStatus').textContent = t('failedToLoadCurriculum', { msg: e.message });
+    }
+  });
+}
+
+// Version-aware header/disclaimer/footer text — driven by CURRICULUM.meta rather
+// than static data-i18n, since the numbers/labels differ per syllabus version.
+function applyCurriculumText() {
+  const meta = CURRICULUM.meta;
+  const vars = { year: meta.year, ver: meta.shortLabel, file: `curriculum_${meta.year}.json` };
+  $('#headerTitleEl').innerHTML = t('headerTitle', vars);
+  $('#subEl').innerHTML = t('subBase') + (meta.excelTemplate ? ' ' + t('subExcelNote') : '') +
+    ' <strong>' + t('subPrivacy') + '</strong>';
+  $('#disclaimerEl').innerHTML = t('disclaimer', vars);
+  $('#newCurriculumNoteEl').innerHTML = meta.newlyIntroduced ? t('newCurriculumNote', vars) : '';
+  $('#newCurriculumNoteEl').classList.toggle('hidden', !meta.newlyIntroduced);
+  $('#resultHintEl').innerHTML = t('resultHint', vars);
+  $('#footerEl').innerHTML = t('footer', vars);
+}
 
 function wireLangSwitch() {
   document.querySelectorAll('.lang-btn').forEach((btn) => {
@@ -41,6 +83,7 @@ function wireLangSwitch() {
 
 // Called by i18n.js's setLang() after the static text has been re-applied.
 function onLangChange() {
+  if (CURRICULUM) applyCurriculumText();
   if (LAST_PARSED) renderStudent(LAST_PARSED.student, LAST_PARSED.printedEarned);
   const collapsed = $('#courseTable').classList.contains('title-collapsed');
   $('#toggleTitleBtn').textContent = t(collapsed ? 'showTitleColumn' : 'hideTitleColumn');
@@ -148,7 +191,7 @@ function runCheck() {
   MATCH = runMatcher(courses, CURRICULUM);
   renderResults(MATCH);
   $('#resultSection').classList.remove('hidden');
-  $('#excelSection').classList.remove('hidden');
+  $('#excelSection').classList.toggle('hidden', !CURRICULUM.meta.excelTemplate);
   $('#resultSection').scrollIntoView({ behavior: 'smooth' });
 }
 
@@ -170,7 +213,8 @@ function renderResults(m) {
   let html = '';
   for (const g of ['GenEd', 'Major', 'Free']) {
     if (!groups[g] || !groups[g].length) continue;
-    html += `<div class="group-title">${t(groupKeys[g]) || g}</div>`;
+    const n = groups[g].reduce((s, r) => s + r.requiredCredits, 0);
+    html += `<div class="group-title">${t(groupKeys[g], { n }) || g}</div>`;
     html += groups[g].map(catHtml).join('');
   }
   $('#categories').innerHTML = html;
@@ -236,8 +280,17 @@ function altPathPickerHtml(r) {
     <label>${t('chooseYourPath')}
       <select id="altPathSelect">${options}</select>
     </label>
-    <div id="altPathChecklist">${altPathChecklistHtml(paths[selectedAltPath], r.requiredCredits)}</div>
+    <div id="altPathChecklist">${altPathDetailHtml(catDef, selectedAltPath)}</div>
   </div>`;
+}
+
+// A path is either a fixed course-code list, or `{ poolFrom: <categoryId> }`
+// meaning "N more credits from that category's own elective pool".
+function altPathDetailHtml(catDef, key) {
+  const def = catDef.paths[key];
+  if (Array.isArray(def)) return altPathChecklistHtml(def, catDef.requiredCredits);
+  if (def && def.poolFrom) return altPathPoolHtml(def, catDef);
+  return '';
 }
 
 function altPathChecklistHtml(codes, requiredCredits) {
@@ -256,12 +309,33 @@ function altPathChecklistHtml(codes, requiredCredits) {
     <div class="path-progress ${done ? 'done' : ''}">${t('pathProgressLabel', { earned, required: requiredCredits })}${done ? ' ✓' : ''}</div>`;
 }
 
+// Pool-backed path preview: since the pool is shared with another category
+// (e.g. Specialized Elective), completing it requires that category's own
+// quota PLUS this path's requiredCredits — shown here as one combined total.
+function altPathPoolHtml(def, catDef) {
+  const poolCat = CURRICULUM.categories.find((c) => c.id === def.poolFrom);
+  const eligible = new Set(poolCat.courses);
+  const passedInPool = MATCH.passed.filter((c) => eligible.has(c.code));
+  const inProgInPool = MATCH.inProgress.filter((c) => eligible.has(c.code));
+  const earned = passedInPool.reduce((s, c) => s + c.credit, 0);
+  const required = poolCat.requiredCredits + catDef.requiredCredits;
+  const rows = (icon, note, list) => list.map((c) => {
+    const title = (CURRICULUM.courseTitles && CURRICULUM.courseTitles[c.code]) || '';
+    return `<li>${icon} <code>${esc(c.code)}</code>${title ? ' – ' + esc(title) : ''} <span class="path-note">(${esc(note)})</span></li>`;
+  }).join('');
+  const items = rows('✓', t('passedFallback'), passedInPool) + rows('⏳', t('inProgressNote'), inProgInPool);
+  const done = earned >= required;
+  return `<div class="cat-detail">${esc(t('altPathPoolNote', { poolName: poolCat.name }))}</div>
+    <ul class="missing-list path-checklist">${items}</ul>
+    <div class="path-progress ${done ? 'done' : ''}">${t('altPathPoolProgress', { earned, required })}${done ? ' ✓' : ''}</div>`;
+}
+
 function wireAltPathPicker() {
   $('#categories').addEventListener('change', (e) => {
     if (e.target.id !== 'altPathSelect') return;
     selectedAltPath = e.target.value;
     const catDef = CURRICULUM.categories.find((c) => c.id === 'ce_alt_study');
-    $('#altPathChecklist').innerHTML = altPathChecklistHtml(catDef.paths[selectedAltPath], catDef.requiredCredits);
+    $('#altPathChecklist').innerHTML = altPathDetailHtml(catDef, selectedAltPath);
   });
 }
 
