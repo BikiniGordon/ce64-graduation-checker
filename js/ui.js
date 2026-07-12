@@ -6,6 +6,7 @@ let MATCH = null;
 let TEMPLATE_BUFFER = null;
 let selectedAltPath = null;
 let LAST_PARSED = null; // { student, printedEarned } — for re-render on language switch
+let CURRENT_COURSES = []; // rows from the review table as of the last check, for enrolled-course lookup
 
 const ALT_PATH_KEYS = {
   project: 'altPathProject', cooperative: 'altPathCooperative', overseas: 'altPathOverseas',
@@ -207,6 +208,7 @@ function readCourseTable() {
 // ---------- Step 3: results ----------
 function runCheck() {
   const courses = readCourseTable();
+  CURRENT_COURSES = courses;
   MATCH = runMatcher(courses, CURRICULUM);
   renderResults(MATCH);
   $('#resultSection').classList.remove('hidden');
@@ -410,9 +412,15 @@ function wireExcel() {
   });
 }
 
+function isEnrolled(code) {
+  const c = CURRENT_COURSES.find(x => x.code?.toUpperCase() === code.toUpperCase());
+  return !!c && c.status === 'in-progress'; // on the transcript, no grade posted yet
+}
+
 function courseChip(code) {
   const title = CURRICULUM.courseTitles && CURRICULUM.courseTitles[code];
-  return `<code>${esc(code)}</code>${title ? ' – ' + esc(title) : ''}`;
+  const enrolled = isEnrolled(code) ? ' [enrolled]' : '';
+  return `<code>${esc(code)}</code>${title ? ' – ' + esc(title) : ''}${enrolled}`;
 }
 
 // ---------- util ----------
