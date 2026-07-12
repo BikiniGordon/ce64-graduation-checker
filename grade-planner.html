@@ -8,6 +8,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
+  <!-- set theme before first paint: saved choice, else browser preference -->
+  <script>document.documentElement.dataset.theme = localStorage.getItem('ce64_theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');</script>
 </head>
 <body>
   <header>
@@ -19,9 +21,10 @@
           <button type="button" class="lang-btn active" data-lang="en">EN</button>
           <button type="button" class="lang-btn" data-lang="th">ไทย</button>
         </div>
+        <button type="button" class="theme-btn" aria-label="Toggle dark/light theme"></button>
       </div>
     </div>
-    <p class="sub" data-i18n="gpSub">Simulate grades for your still-ungraded courses and see your projected GPA. All GPA values are rounded to 3 decimal places.</p>
+    <p class="sub" data-i18n="gpSub">Simulate grades for your ungraded courses and preview your GPA (rounded to 3 decimals).</p>
   </header>
 
   <main>

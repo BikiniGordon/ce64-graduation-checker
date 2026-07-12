@@ -8,6 +8,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
+  <!-- set theme before first paint: saved choice, else browser preference -->
+  <script>document.documentElement.dataset.theme = localStorage.getItem('ce64_theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');</script>
   <!-- pdf.js + ExcelJS from CDN (all processing stays in your browser) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js"></script>
@@ -28,13 +30,12 @@
           <button type="button" class="lang-btn active" data-lang="en">EN</button>
           <button type="button" class="lang-btn" data-lang="th">ไทย</button>
         </div>
+        <button type="button" class="theme-btn" aria-label="Toggle dark/light theme"></button>
       </div>
     </div>
     <p class="sub" id="subEl">Upload your unofficial transcript PDF to see what you still need to graduate.
       <strong>Everything runs in your browser — nothing is uploaded.</strong></p>
-    <p class="disclaimer" id="disclaimerEl">⚠️ Unofficial reference tool for the <strong>Computer Engineering curriculum พ.ศ. 2564 (CE64) only</strong>.
-      Course lists and rules were transcribed by hand and may contain mistakes — always double-check the results
-      against the official syllabus and your academic advisor before making enrollment decisions.</p>
+    <p class="disclaimer" id="disclaimerEl">⚠️ Unofficial tool for <strong>CE64 (พ.ศ. 2564) only</strong> — data was hand-transcribed and may contain mistakes. Verify with the official syllabus and your advisor.</p>
     <p class="disclaimer new-curriculum-note hidden" id="newCurriculumNoteEl"></p>
   </header>
 
@@ -46,10 +47,12 @@
         <input type="file" id="pdfInput" accept="application/pdf" hidden />
         <p data-i18n="dropZoneText">Drag &amp; drop your transcript PDF here, or <button type="button" id="pdfBtn" class="link-btn">browse</button></p>
       </div>
-      <p class="hint" data-i18n="transcriptHelp">Don't have the PDF yet? Get your <strong>unofficial transcript</strong> from the KMITL registration system:
-        <a href="https://www.reg.kmitl.ac.th/u_student/report_transcript_show2.php" target="_blank" rel="noopener noreferrer">reg.kmitl.ac.th/u_student/report_transcript_show2.php</a>
-        — log in with your student ID, open the transcript page, then print it (<kbd>Ctrl/Cmd + P</kbd>) and choose
-        <strong>Save as PDF</strong>. Upload that file here.</p>
+      <details class="help">
+        <summary data-i18n="transcriptHelpSummary">Where do I get the PDF?</summary>
+        <p class="hint" data-i18n="transcriptHelp">Get your <strong>unofficial transcript</strong> from
+          <a href="https://www.reg.kmitl.ac.th/u_student/report_transcript_show2.php" target="_blank" rel="noopener noreferrer">the KMITL registration system</a>
+          — log in with your student ID, open the transcript page, and download it as PDF.</p>
+      </details>
       <p id="pdfStatus" class="status"></p>
     </section>
 
@@ -88,10 +91,8 @@
     <!-- Step 4: Excel -->
     <section class="card hidden" id="excelSection">
       <h2 data-i18n="step4Title">4 · Fill your Excel checklist (optional)</h2>
-      <p class="hint" data-i18n="excelHint">Upload your original tracking template. We'll tick completed courses,
-        fill active placeholder rows from your transcript, and skip struck-through rows.
-        Don't have the template? <a href="https://docs.google.com/spreadsheets/d/1R8q71tQRTK_kbs3xTkeHaSPa9aVjujJjepePnJegGrw/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Get a copy here</a>
-        (credit to its original author — not made by this tool).</p>
+      <p class="hint" data-i18n="excelHint">Upload your tracking template — we'll fill it from your transcript.
+        No template? <a href="https://docs.google.com/spreadsheets/d/1R8q71tQRTK_kbs3xTkeHaSPa9aVjujJjepePnJegGrw/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Get a copy here</a> (credit to its original author).</p>
       <input type="file" id="excelInput"
         accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
       <button type="button" id="fillBtn" class="primary" disabled data-i18n="fillBtn">Fill &amp; download ▾</button>
@@ -101,8 +102,7 @@
   </main>
 
   <footer>
-    <p id="footerEl">Curriculum: Computer Engineering, KMITL — พ.ศ. 2564 (CE64) only · Rules editable in <code>data/curriculum_2564.json</code>
-      · Unofficial tool — always confirm results with the official syllabus / your advisor.</p>
+    <p id="footerEl">Computer Engineering, KMITL — พ.ศ. 2564 (CE64) · Unofficial tool — confirm results with the official syllabus / your advisor.</p>
   </footer>
 
   <script src="js/i18n.js"></script>

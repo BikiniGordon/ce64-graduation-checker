@@ -6,13 +6,14 @@ const I18N = {
     subBase: 'Upload your unofficial transcript PDF to see what you still need to graduate.',
     subExcelNote: 'You can also auto-fill your Excel tracking checklist.',
     subPrivacy: 'Everything runs in your browser — nothing is uploaded.',
-    disclaimer: '⚠️ Unofficial reference tool for the <strong>Computer Engineering curriculum พ.ศ. {year} ({ver}) only</strong>. Course lists and rules were transcribed by hand and may contain mistakes — always double-check the results against the official syllabus and your academic advisor before making enrollment decisions.',
-    newCurriculumNote: '🆕 <strong>{ver} (พ.ศ. {year}) is the newest revision and has only just come into effect.</strong> It hasn\'t been battle-tested against real transcripts yet, so course codes, credit splits, and category rules are especially likely to need correction — please double- and triple-check everything against the official syllabus before relying on it.',
+    disclaimer: '⚠ Unofficial tool for <strong>{ver} (พ.ศ. {year}) only</strong> — data was hand-transcribed and may contain mistakes. Verify with the official syllabus and your advisor.',
+    newCurriculumNote: 'NEW <strong>{ver} (พ.ศ. {year}) is the newest revision and has only just come into effect.</strong> It hasn\'t been battle-tested against real transcripts yet, so course codes, credit splits, and category rules are especially likely to need correction — please double- and triple-check everything against the official syllabus before relying on it.',
     curriculumVersionLabel: 'Syllabus:',
 
     step1Title: '1 · Upload transcript (PDF)',
     dropZoneText: 'Drag &amp; drop your transcript PDF here, or <button type="button" id="pdfBtn" class="link-btn">browse</button>',
-    transcriptHelp: 'Don\'t have the PDF yet? Get your <strong>unofficial transcript</strong> from the KMITL registration system: <a href="https://www.reg.kmitl.ac.th/u_student/report_transcript_show2.php" target="_blank" rel="noopener noreferrer">reg.kmitl.ac.th/u_student/report_transcript_show2.php</a> — log in with your student ID, open the transcript page, then donwload as PDF. Upload that file here.',
+    transcriptHelpSummary: 'Where do I get the PDF?',
+    transcriptHelp: 'Get your <strong>unofficial transcript</strong> from <a href="https://www.reg.kmitl.ac.th/u_student/report_transcript_show2.php" target="_blank" rel="noopener noreferrer">the KMITL registration system</a> — log in with your student ID, open the transcript page, and download it as PDF.',
 
     step2Title: '2 · Review parsed courses',
     reviewHint: 'Fix any mis-read row before checking. Grade blank = in-progress.',
@@ -27,10 +28,10 @@ const I18N = {
     resultHint: 'Reference for {ver} (พ.ศ. {year}) only — verify against the official syllabus before relying on this.',
 
     step4Title: '4 · Auto-fill your Excel checklist (optional)',
-    excelHint: 'Upload your original tracking template and we\'ll <strong>auto-fill it from your transcript</strong>: tick completed courses, fill active placeholder rows with matching courses, and skip struck-through rows — all from the same data used for the check above. Don\'t have the template? <a href="https://docs.google.com/spreadsheets/d/1R8q71tQRTK_kbs3xTkeHaSPa9aVjujJjepePnJegGrw/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Get a copy here</a> (credit to its original author — not made by this tool).',
+    excelHint: 'Upload your tracking template — we\'ll <strong>auto-fill it from your transcript</strong>. No template? <a href="https://docs.google.com/spreadsheets/d/1R8q71tQRTK_kbs3xTkeHaSPa9aVjujJjepePnJegGrw/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Get a copy here</a> (credit to its original author).',
     fillBtn: 'Fill &amp; download ▾',
 
-    footer: 'Curriculum: Computer Engineering, KMITL — พ.ศ. {year} ({ver}) only · Rules editable in <code>data/{file}</code> · Unofficial tool — always confirm results with the official syllabus / your advisor.',
+    footer: 'Computer Engineering, KMITL — พ.ศ. {year} ({ver}) · Unofficial tool — confirm results with the official syllabus / your advisor.',
 
     failedToLoadCurriculum: 'Failed to load curriculum rules: {msg}',
     readingFile: 'Reading {name} …',
@@ -42,8 +43,8 @@ const I18N = {
 
     overallProgress: '{earned} / {total} credits toward graduation',
     toGo: '{n} to go',
-    allSatisfied: '✓ All categories satisfied — you meet the graduation requirements!',
-    sanityOk: 'Sanity check ✓ — computed {a} earned credits matches the transcript\'s printed total ({b}).',
+    allSatisfied: '[✓] All categories satisfied — you meet the graduation requirements!',
+    sanityOk: 'Sanity check [✓] — computed {a} earned credits matches the transcript\'s printed total ({b}).',
     sanityWarn: 'Sanity check ⚠ — computed {a} earned credits vs transcript\'s printed {b}. Some rows may be mis-parsed; review the table above.',
 
     groupGenEd: 'General Education ({n})',
@@ -64,9 +65,9 @@ const I18N = {
     inProgressNote: 'in progress',
     passedFallback: 'passed',
 
-    inProgressHeader: '⏳ In progress (no grade yet — not counted)',
-    failedHeader: '✗ Failed / withdrawn',
-    unmatchedHeader: '❓ Passed but not applied to any requirement',
+    inProgressHeader: '→ In progress (no grade yet — not counted)',
+    failedHeader: '[✗] Failed / withdrawn',
+    unmatchedHeader: '[?] Passed but not applied to any requirement',
 
     templateLoaded: 'Template loaded: {name}',
     filling: 'Filling…',
@@ -88,7 +89,7 @@ const I18N = {
 
     gpPageTitle: 'Grade Planner',
     gpBackLink: '← Back to Graduation Checker',
-    gpSub: 'Simulate grades for your still-ungraded courses and see your projected GPA. All GPA values are rounded to 3 decimal places.',
+    gpSub: 'Simulate grades for your ungraded courses and preview your GPA (rounded to 3 decimals).',
     gpEmptyTitle: 'No transcript data found',
     gpEmptyText: 'Go back to the Graduation Checker, upload your transcript, and click "Grade Planner ▸" from the review step.',
     gpEmptyLink: '← Go upload your transcript',
@@ -99,7 +100,7 @@ const I18N = {
     gpExcludedNote: '{n} course(s) with non-GPA grades (S/U/W/I) were excluded from all calculations below.',
 
     gpSimTitle: 'This semester — simulate your grades',
-    gpSimHint: 'These are the courses on your transcript with no grade posted yet. Pick a grade for each to see your projected GPA.',
+    gpSimHint: 'Courses with no grade posted yet — pick a grade for each.',
     thGradeSim: 'Simulated grade',
     gpAddRowBtn: '+ Add course',
     gpGradeUnset: '— unset —',
@@ -111,7 +112,7 @@ const I18N = {
     gpNoDataYet: '—',
 
     gpTargetTitle: 'Or work backwards: set a target cumulative GPA',
-    gpTargetHint: 'Enter the cumulative GPA you want to have after this semester — we\'ll calculate the average grade you need this semester to get there.',
+    gpTargetHint: 'Enter your goal — we\'ll compute the semester GPA you need to get there.',
     gpTargetLabel: 'Target cumulative GPA',
     gpTargetNeedCourses: 'Add your in-progress courses first.',
     gpRequiredGpa: 'You need at least a {gpa} GPA this semester.',
@@ -124,13 +125,14 @@ const I18N = {
     subBase: 'อัปโหลดใบแสดงผลการเรียน (unofficial transcript) ของคุณ เพื่อดูว่ายังต้องลงทะเบียนอะไรอีกจึงจะจบการศึกษา',
     subExcelNote: 'พร้อมกรอกเช็คลิสต์ Excel ให้อัตโนมัติได้ด้วย (ไม่บังคับ)',
     subPrivacy: 'ทุกอย่างประมวลผลในเบราว์เซอร์ของคุณ — ไม่มีการอัปโหลดข้อมูลไปที่ใด',
-    disclaimer: '⚠️ เครื่องมืออ้างอิงแบบไม่เป็นทางการ สำหรับ <strong>หลักสูตรวิศวกรรมคอมพิวเตอร์ พ.ศ. {year} ({ver}) เท่านั้น</strong> รายวิชาและกฎเกณฑ์ถูกคัดลอกด้วยมือและอาจมีข้อผิดพลาด — โปรดตรวจสอบผลลัพธ์กับหลักสูตรฉบับทางการและอาจารย์ที่ปรึกษาก่อนตัดสินใจลงทะเบียนเรียนเสมอ',
-    newCurriculumNote: '🆕 <strong>{ver} (พ.ศ. {year}) เป็นหลักสูตรฉบับล่าสุดที่เพิ่งเริ่มใช้</strong> ยังไม่เคยผ่านการตรวจสอบกับใบแสดงผลการเรียนจริง จึงมีโอกาสสูงที่รหัสวิชา การแบ่งหน่วยกิต และกฎเกณฑ์ต่าง ๆ จะต้องมีการแก้ไข — โปรดตรวจสอบทุกอย่างซ้ำกับหลักสูตรฉบับทางการก่อนนำไปใช้จริง',
+    disclaimer: '⚠ เครื่องมือไม่เป็นทางการ สำหรับ <strong>{ver} (พ.ศ. {year}) เท่านั้น</strong> — ข้อมูลคัดลอกด้วยมือและอาจมีข้อผิดพลาด โปรดตรวจสอบกับหลักสูตรฉบับทางการและอาจารย์ที่ปรึกษา',
+    newCurriculumNote: 'NEW <strong>{ver} (พ.ศ. {year}) เป็นหลักสูตรฉบับล่าสุดที่เพิ่งเริ่มใช้</strong> ยังไม่เคยผ่านการตรวจสอบกับใบแสดงผลการเรียนจริง จึงมีโอกาสสูงที่รหัสวิชา การแบ่งหน่วยกิต และกฎเกณฑ์ต่าง ๆ จะต้องมีการแก้ไข — โปรดตรวจสอบทุกอย่างซ้ำกับหลักสูตรฉบับทางการก่อนนำไปใช้จริง',
     curriculumVersionLabel: 'หลักสูตร:',
 
     step1Title: '1 · อัปโหลดใบแสดงผลการเรียน (PDF)',
     dropZoneText: 'ลากไฟล์ PDF ใบแสดงผลการเรียนมาวางที่นี่ หรือ <button type="button" id="pdfBtn" class="link-btn">เลือกไฟล์</button>',
-    transcriptHelp: 'ยังไม่มีไฟล์ PDF ใช่ไหม? ดาวน์โหลด<strong>ใบแสดงผลการเรียนแบบไม่เป็นทางการ</strong>ได้จากระบบทะเบียนของ สจล.: <a href="https://www.reg.kmitl.ac.th/u_student/report_transcript_show2.php" target="_blank" rel="noopener noreferrer">reg.kmitl.ac.th/u_student/report_transcript_show2.php</a> — เข้าสู่ระบบด้วยรหัสนักศึกษา เปิดหน้าใบแสดงผลการเรียน แล้วดาวน์โหลดเป็น PDF จากนั้นอัปโหลดไฟล์นั้นที่นี่',
+    transcriptHelpSummary: 'จะเอาไฟล์ PDF มาจากไหน?',
+    transcriptHelp: 'ดาวน์โหลด<strong>ใบแสดงผลการเรียนแบบไม่เป็นทางการ</strong>ได้จาก<a href="https://www.reg.kmitl.ac.th/u_student/report_transcript_show2.php" target="_blank" rel="noopener noreferrer">ระบบทะเบียนของ สจล.</a> — เข้าสู่ระบบด้วยรหัสนักศึกษา เปิดหน้าใบแสดงผลการเรียน แล้วดาวน์โหลดเป็น PDF',
 
     step2Title: '2 · ตรวจสอบรายวิชาที่อ่านได้',
     reviewHint: 'แก้ไขแถวที่อ่านผิดก่อนตรวจสอบ ช่องเกรดว่าง = กำลังเรียนอยู่',
@@ -145,10 +147,10 @@ const I18N = {
     resultHint: 'อ้างอิงสำหรับ {ver} (พ.ศ. {year}) เท่านั้น — โปรดตรวจสอบกับหลักสูตรฉบับทางการก่อนนำไปใช้จริง',
 
     step4Title: '4 · กรอกเช็คลิสต์ Excel ให้อัตโนมัติ (ไม่บังคับ)',
-    excelHint: 'อัปโหลดไฟล์เทมเพลตติดตามผลของคุณ แล้วระบบจะ<strong>กรอกให้อัตโนมัติจากใบแสดงผลการเรียนของคุณ</strong>: ติ๊กวิชาที่เรียนผ่านแล้ว กรอกแถวที่รอเลือกวิชาด้วยรายวิชาที่ตรงกัน และข้ามแถวที่ถูกขีดฆ่าไว้ — ใช้ข้อมูลชุดเดียวกับการตรวจสอบด้านบน ยังไม่มีเทมเพลต? <a href="https://docs.google.com/spreadsheets/d/1R8q71tQRTK_kbs3xTkeHaSPa9aVjujJjepePnJegGrw/edit?usp=sharing" target="_blank" rel="noopener noreferrer">ขอสำเนาได้ที่นี่</a> (เครดิตแก่ผู้สร้างต้นฉบับ — ไม่ได้สร้างโดยเครื่องมือนี้)',
+    excelHint: 'อัปโหลดเทมเพลตติดตามผลของคุณ แล้วระบบจะ<strong>กรอกให้อัตโนมัติจากใบแสดงผลการเรียน</strong> ยังไม่มีเทมเพลต? <a href="https://docs.google.com/spreadsheets/d/1R8q71tQRTK_kbs3xTkeHaSPa9aVjujJjepePnJegGrw/edit?usp=sharing" target="_blank" rel="noopener noreferrer">ขอสำเนาได้ที่นี่</a> (เครดิตแก่ผู้สร้างต้นฉบับ)',
     fillBtn: 'กรอกและดาวน์โหลด ▾',
 
-    footer: 'หลักสูตร: วิศวกรรมคอมพิวเตอร์ สจล. — พ.ศ. {year} ({ver}) เท่านั้น · แก้ไขกฎเกณฑ์ได้ที่ <code>data/{file}</code> · เครื่องมือไม่เป็นทางการ — โปรดยืนยันผลลัพธ์กับหลักสูตรฉบับทางการ / อาจารย์ที่ปรึกษาเสมอ',
+    footer: 'วิศวกรรมคอมพิวเตอร์ สจล. — พ.ศ. {year} ({ver}) · เครื่องมือไม่เป็นทางการ — โปรดยืนยันผลลัพธ์กับหลักสูตรฉบับทางการ / อาจารย์ที่ปรึกษา',
 
     failedToLoadCurriculum: 'โหลดกฎเกณฑ์หลักสูตรไม่สำเร็จ: {msg}',
     readingFile: 'กำลังอ่าน {name} …',
@@ -160,8 +162,8 @@ const I18N = {
 
     overallProgress: '{earned} / {total} หน่วยกิต สู่การจบการศึกษา',
     toGo: 'เหลืออีก {n}',
-    allSatisfied: '✓ ครบทุกหมวดแล้ว — คุณผ่านเกณฑ์การจบการศึกษา!',
-    sanityOk: 'ตรวจสอบความถูกต้อง ✓ — หน่วยกิตที่คำนวณได้ {a} ตรงกับยอดรวมในใบแสดงผลการเรียน ({b})',
+    allSatisfied: '[✓] ครบทุกหมวดแล้ว — คุณผ่านเกณฑ์การจบการศึกษา!',
+    sanityOk: 'ตรวจสอบความถูกต้อง [✓] — หน่วยกิตที่คำนวณได้ {a} ตรงกับยอดรวมในใบแสดงผลการเรียน ({b})',
     sanityWarn: 'ตรวจสอบความถูกต้อง ⚠ — หน่วยกิตที่คำนวณได้ {a} ไม่ตรงกับยอดในใบแสดงผลการเรียน {b} บางแถวอาจอ่านผิด โปรดตรวจสอบตารางด้านบน',
 
     groupGenEd: 'หมวดวิชาศึกษาทั่วไป ({n})',
@@ -182,9 +184,9 @@ const I18N = {
     inProgressNote: 'กำลังเรียนอยู่',
     passedFallback: 'ผ่านแล้ว',
 
-    inProgressHeader: '⏳ กำลังเรียนอยู่ (ยังไม่มีเกรด — ยังไม่นับ)',
-    failedHeader: '✗ ตก / ถอน',
-    unmatchedHeader: '❓ ผ่านแล้วแต่ยังไม่ถูกนับในหมวดใด',
+    inProgressHeader: '→ กำลังเรียนอยู่ (ยังไม่มีเกรด — ยังไม่นับ)',
+    failedHeader: '[✗] ตก / ถอน',
+    unmatchedHeader: '[?] ผ่านแล้วแต่ยังไม่ถูกนับในหมวดใด',
 
     templateLoaded: 'โหลดเทมเพลตแล้ว: {name}',
     filling: 'กำลังกรอกข้อมูล…',
@@ -206,7 +208,7 @@ const I18N = {
 
     gpPageTitle: 'ตัววางแผนเกรด',
     gpBackLink: '← กลับไปหน้าตรวจสอบการจบการศึกษา',
-    gpSub: 'จำลองเกรดสำหรับวิชาที่ยังไม่มีเกรด แล้วดูเกรดเฉลี่ยที่คาดการณ์ไว้ ตัวเลขเกรดเฉลี่ยทั้งหมดปัดเศษเป็นทศนิยม 3 ตำแหน่ง',
+    gpSub: 'จำลองเกรดวิชาที่ยังไม่มีเกรด แล้วดูเกรดเฉลี่ยที่คาดการณ์ (ปัดเศษทศนิยม 3 ตำแหน่ง)',
     gpEmptyTitle: 'ไม่พบข้อมูลใบแสดงผลการเรียน',
     gpEmptyText: 'กลับไปที่หน้าตรวจสอบการจบการศึกษา อัปโหลดใบแสดงผลการเรียน แล้วกด "วางแผนเกรด ▸" จากขั้นตอนตรวจสอบรายวิชา',
     gpEmptyLink: '← ไปอัปโหลดใบแสดงผลการเรียน',
@@ -217,7 +219,7 @@ const I18N = {
     gpExcludedNote: 'มี {n} วิชาที่มีเกรดแบบไม่นับเกรดเฉลี่ย (S/U/W/I) ถูกตัดออกจากการคำนวณทั้งหมดด้านล่าง',
 
     gpSimTitle: 'ภาคเรียนนี้ — จำลองเกรดของคุณ',
-    gpSimHint: 'นี่คือวิชาในใบแสดงผลการเรียนของคุณที่ยังไม่มีเกรด เลือกเกรดสำหรับแต่ละวิชาเพื่อดูเกรดเฉลี่ยที่คาดการณ์ไว้',
+    gpSimHint: 'วิชาที่ยังไม่มีเกรด — เลือกเกรดสำหรับแต่ละวิชา',
     thGradeSim: 'เกรดจำลอง',
     gpAddRowBtn: '+ เพิ่มวิชา',
     gpGradeUnset: '— ยังไม่เลือก —',
@@ -229,7 +231,7 @@ const I18N = {
     gpNoDataYet: '—',
 
     gpTargetTitle: 'หรือคำนวณย้อนกลับ: ตั้งเป้าเกรดเฉลี่ยสะสม',
-    gpTargetHint: 'ใส่เกรดเฉลี่ยสะสมที่คุณต้องการหลังภาคเรียนนี้ — เราจะคำนวณเกรดเฉลี่ยที่ต้องได้ในภาคเรียนนี้เพื่อให้ถึงเป้าหมาย',
+    gpTargetHint: 'ใส่เป้าหมายของคุณ — เราจะคำนวณเกรดเฉลี่ยที่ต้องได้ในภาคเรียนนี้',
     gpTargetLabel: 'เป้าหมายเกรดเฉลี่ยสะสม',
     gpTargetNeedCourses: 'เพิ่มวิชาที่กำลังเรียนอยู่ก่อน',
     gpRequiredGpa: 'คุณต้องได้เกรดเฉลี่ยอย่างน้อย {gpa} ในภาคเรียนนี้',
@@ -266,3 +268,12 @@ function setLang(lang) {
   applyStaticI18n();
   if (typeof onLangChange === 'function') onLangChange();
 }
+
+// Theme toggle — initial theme is set pre-paint by an inline <head> script.
+document.querySelectorAll('.theme-btn').forEach((btn) =>
+  btn.addEventListener('click', () => {
+    const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    localStorage.setItem('ce64_theme', next);
+  })
+);
