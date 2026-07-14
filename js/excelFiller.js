@@ -133,6 +133,24 @@ function fillPlaceholder({ catById, currentCat, poolByCat, match, usedInProgress
 // (CE Major) runs much further down, but this only touches columns A-E.
 const OVERFLOW_SHEET_NAME = 'overall';
 const OVERFLOW_START_ROW = 30;
+const OVERFLOW_ROW_HEIGHT = 28.5; // matches every other row on the reference template
+
+// Colors lifted from the reference template's own section-band styling
+// (e.g. the "Free Elective" band at A24:E24 and its header/data rows below).
+const ARIAL = 'Arial';
+const THIN_BORDER = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
+const CENTER = { horizontal: 'center', vertical: 'center' };
+const LEFT_MID = { horizontal: 'left', vertical: 'center' };
+const TITLE_FILL = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFF9900' } }; // orange band
+const SUBTITLE_FILL = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFCE5CD' } }; // light orange
+const TAG_FILL = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFF3F3F3' } }; // neutral gray, for the "-" type tag
+
+function styleCell(cell, { font, fill, alignment } = {}) {
+  cell.font = { name: ARIAL, size: 12, ...font };
+  cell.border = THIN_BORDER;
+  cell.alignment = alignment || CENTER;
+  if (fill) cell.fill = fill;
+}
 
 function appendOverflowSection(match, writtenCodes, log, workbook) {
   const overflow = [...match.passed, ...match.inProgress].filter((c) => !writtenCodes.has(c.code));
@@ -145,26 +163,44 @@ function appendOverflowSection(match, writtenCodes, log, workbook) {
   const [typeCol, codeCol, titleCol, creditCol, checkCol] = [1, 2, 3, 4, 5];
   let r = OVERFLOW_START_ROW;
 
+  // Section band, styled like the template's own "Free Elective" band.
+  sheet.mergeCells(r, typeCol, r, codeCol);
+  styleCell(sheet.getCell(r, typeCol), { font: { bold: true, color: { argb: 'FFFFFFFF' } }, fill: TITLE_FILL });
   sheet.getCell(r, typeCol).value = 'Overflow';
-  sheet.getCell(r, typeCol).font = { bold: true };
+  sheet.mergeCells(r, titleCol, r, checkCol);
+  styleCell(sheet.getCell(r, titleCol), { fill: SUBTITLE_FILL });
+  sheet.getCell(r, titleCol).value = 'Courses not placed in any section above';
+  sheet.getRow(r).height = OVERFLOW_ROW_HEIGHT;
   r++;
 
+  // Column header row, styled like every other block's header row.
   const headerRow = sheet.getRow(r);
+  styleCell(headerRow.getCell(typeCol), { font: { bold: true } });
   headerRow.getCell(typeCol).value = 'Type';
+  styleCell(headerRow.getCell(codeCol), { font: { bold: true } });
   headerRow.getCell(codeCol).value = 'Course No.';
+  styleCell(headerRow.getCell(titleCol), { font: { bold: true }, alignment: LEFT_MID });
   headerRow.getCell(titleCol).value = 'Course Title';
+  styleCell(headerRow.getCell(creditCol), { font: { bold: true } });
   headerRow.getCell(creditCol).value = 'Credit(s)';
+  styleCell(headerRow.getCell(checkCol), { font: { bold: true } });
   headerRow.getCell(checkCol).value = 'Checklist';
-  headerRow.font = { bold: true };
+  headerRow.height = OVERFLOW_ROW_HEIGHT;
   r++;
 
   for (const c of overflow) {
     const row = sheet.getRow(r);
+    styleCell(row.getCell(typeCol), { fill: TAG_FILL });
     row.getCell(typeCol).value = '-';
+    styleCell(row.getCell(codeCol));
     row.getCell(codeCol).value = c.code;
+    styleCell(row.getCell(titleCol), { alignment: LEFT_MID });
     row.getCell(titleCol).value = c.title;
+    styleCell(row.getCell(creditCol));
     row.getCell(creditCol).value = c.credit;
+    styleCell(row.getCell(checkCol));
     row.getCell(checkCol).value = c.status !== 'in-progress';
+    row.height = OVERFLOW_ROW_HEIGHT;
     r++;
   }
   log.push(`Added an "Overflow" section to "${sheet.name}" at row ${OVERFLOW_START_ROW}: ` +
