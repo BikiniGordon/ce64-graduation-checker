@@ -54,6 +54,27 @@
           — log in with your student ID, open the transcript page, and download it as PDF.</p>
       </details>
       <p id="pdfStatus" class="status"></p>
+
+      <div id="semesterSummary" class="semester-summary hidden">
+        <div class="semester-summary-head">
+          <button type="button" id="semPrevBtn" class="secondary sem-nav-btn" aria-label="Previous semester">‹</button>
+          <div class="semester-summary-title">
+            <h3 id="semesterLabel"></h3>
+            <span id="semesterPos" class="semester-pos"></span>
+          </div>
+          <button type="button" id="semNextBtn" class="secondary sem-nav-btn" aria-label="Next semester">›</button>
+        </div>
+        <div id="semesterGpaStats" class="gp-stat-grid"></div>
+        <div class="table-wrap">
+          <table class="semester-table">
+            <thead>
+              <tr><th data-i18n="thCode">Code</th><th class="title-col" data-i18n="thTitle">Title</th><th data-i18n="thCredit">Credit</th><th data-i18n="thGrade">Grade</th></tr>
+            </thead>
+            <tbody id="semesterCourses"></tbody>
+          </table>
+        </div>
+        <p id="semesterCreditsTotal" class="hint"></p>
+      </div>
     </section>
 
     <!-- Step 2: review parsed courses -->

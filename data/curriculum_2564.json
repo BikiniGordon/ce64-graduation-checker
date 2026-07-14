@@ -113,10 +113,10 @@
       "group": "GenEd",
       "requiredCredits": 6,
       "mode": "prefix-pool",
-      "prefix": "90",
+      "prefix": "90641",
       "knownCourses": ["90641001", "90642999", "90641002", "90641007", "90641003"],
-      "note": "Fixed university foundation courses (Charm School, Digital Intelligence/Citizen, Sports, etc.). Codes vary by GenEd catalog version; matched by 90-prefix up to the credit cap.",
-      "noteTh": "วิชาพื้นฐานของสถาบัน (โรงเรียนสร้างเสน่ห์, ความฉลาดทางดิจิทัล/พลเมืองดิจิทัล, กีฬา ฯลฯ) รหัสวิชาอาจแตกต่างกันตามรุ่นหลักสูตรศึกษาทั่วไป จับคู่ด้วยรหัสขึ้นต้น 90 จนครบหน่วยกิต"
+      "note": "Fixed university foundation courses (Charm School, Digital Intelligence/Citizen, Sports, etc.). Codes vary by GenEd catalog version; matched by 90641-prefix up to the credit cap (90642999 is an older code for 90641001, already normalized via codeAliases).",
+      "noteTh": "วิชาพื้นฐานของสถาบัน (โรงเรียนสร้างเสน่ห์, ความฉลาดทางดิจิทัล/พลเมืองดิจิทัล, กีฬา ฯลฯ) รหัสวิชาอาจแตกต่างกันตามรุ่นหลักสูตรศึกษาทั่วไป จับคู่ด้วยรหัสขึ้นต้น 90641 จนครบหน่วยกิต (90642999 เป็นรหัสเก่าของ 90641001 ซึ่งถูกแปลงผ่าน codeAliases แล้ว)"
     },
     {
       "id": "gened_language",
@@ -124,7 +124,7 @@
       "group": "GenEd",
       "requiredCredits": 9,
       "mode": "prefix-pool",
-      "prefix": "90",
+      "prefix": "90644",
       "mandatoryCourses": ["90644007", "90644008"],
       "knownCourses": ["90644007", "90644008", "90644012", "90644057", "90644062"],
       "note": "Foundation English 1 & 2 are mandatory; the remaining 3 credits are a language elective.",

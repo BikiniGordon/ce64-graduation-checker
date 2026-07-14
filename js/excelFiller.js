@@ -103,7 +103,7 @@ function courseFitsCategory(course, cat) {
 // Fill an active placeholder row (pattern/dash/blank code) with an unused
 // transcript course that fits `currentCat`, ticking Checklist only if graded.
 function fillPlaceholder({ catById, currentCat, poolByCat, match, usedInProgress, log,
-  codeCell, titleCell, creditCell, checkCell }) {
+  writtenCodes, codeCell, titleCell, creditCell, checkCell }) {
   const cat = catById[currentCat];
   if (!cat) return;
   const queue = poolByCat[currentCat] || [];
@@ -119,9 +119,56 @@ function fillPlaceholder({ catById, currentCat, poolByCat, match, usedInProgress
     titleCell.value = course.title;
     if (!cellText(creditCell).trim()) creditCell.value = course.credit;
     checkCell.value = graded;
+    writtenCodes.add(course.code);
     log.push(`Filled ${cat.name}: ${course.code} ${course.title}` +
       (graded ? ' ✓' : ' (in-progress, unticked)'));
   }
+}
+
+// Fixed drop zone for anything that never made it into the template (the
+// template only has so many rows): the "Overall" sheet, starting at row 30,
+// in the same Type / Course No. / Course Title / Credit(s) / Checklist
+// layout the template's own blocks use. Row 30 is a known-empty spot in that
+// column group on the reference template — the sheet's other column group
+// (CE Major) runs much further down, but this only touches columns A-E.
+const OVERFLOW_SHEET_NAME = 'overall';
+const OVERFLOW_START_ROW = 30;
+
+function appendOverflowSection(match, writtenCodes, log, workbook) {
+  const overflow = [...match.passed, ...match.inProgress].filter((c) => !writtenCodes.has(c.code));
+  if (!overflow.length) return;
+
+  const sheet = workbook.worksheets.find((s) => s.name.trim().toLowerCase() === OVERFLOW_SHEET_NAME) ||
+    workbook.worksheets[0];
+  if (!sheet) return;
+
+  const [typeCol, codeCol, titleCol, creditCol, checkCol] = [1, 2, 3, 4, 5];
+  let r = OVERFLOW_START_ROW;
+
+  sheet.getCell(r, typeCol).value = 'Overflow';
+  sheet.getCell(r, typeCol).font = { bold: true };
+  r++;
+
+  const headerRow = sheet.getRow(r);
+  headerRow.getCell(typeCol).value = 'Type';
+  headerRow.getCell(codeCol).value = 'Course No.';
+  headerRow.getCell(titleCol).value = 'Course Title';
+  headerRow.getCell(creditCol).value = 'Credit(s)';
+  headerRow.getCell(checkCol).value = 'Checklist';
+  headerRow.font = { bold: true };
+  r++;
+
+  for (const c of overflow) {
+    const row = sheet.getRow(r);
+    row.getCell(typeCol).value = '-';
+    row.getCell(codeCol).value = c.code;
+    row.getCell(titleCol).value = c.title;
+    row.getCell(creditCol).value = c.credit;
+    row.getCell(checkCol).value = c.status !== 'in-progress';
+    r++;
+  }
+  log.push(`Added an "Overflow" section to "${sheet.name}" at row ${OVERFLOW_START_ROW}: ` +
+    `${overflow.length} course(s) didn't fit any row in the template.`);
 }
 
 /**
@@ -143,6 +190,7 @@ async function fillTemplate(templateBuffer, match, curriculum) {
   const poolByCat = {};
   for (const r of match.results) poolByCat[r.id] = (r.assigned || []).slice();
   const usedInProgress = new Set();
+  const writtenCodes = new Set(); // every course code that actually landed in a cell
 
   const log = [];
 
@@ -201,7 +249,7 @@ async function fillTemplate(templateBuffer, match, curriculum) {
           // Skip struck-through (removed / changed) rows entirely.
           if (isStruck(titleCell) || isStruck(typeCell)) continue;
           fillPlaceholder({ catById, currentCat, poolByCat, match, usedInProgress, log,
-            codeCell, titleCell, creditCell, checkCell });
+            writtenCodes, codeCell, titleCell, creditCell, checkCell });
           continue;
         }
 
@@ -210,7 +258,7 @@ async function fillTemplate(templateBuffer, match, curriculum) {
 
         if (isPlaceholderCode(codeVal)) {
           fillPlaceholder({ catById, currentCat, poolByCat, match, usedInProgress, log,
-            codeCell, titleCell, creditCell, checkCell });
+            writtenCodes, codeCell, titleCell, creditCell, checkCell });
           continue;
         }
 
@@ -218,6 +266,7 @@ async function fillTemplate(templateBuffer, match, curriculum) {
         const passed = passedCodes.has(codeVal);
         checkCell.value = passed;
         if (passed) {
+          writtenCodes.add(codeVal);
           // This course now has a dedicated, hardcoded slot in the template.
           // Remove it from every category's pool (not just currentCat's) so a
           // placeholder row elsewhere can't reuse the same course a second time
@@ -229,11 +278,14 @@ async function fillTemplate(templateBuffer, match, curriculum) {
           }
         }
         if (!passed && inProgressCodes.has(codeVal)) {
+          writtenCodes.add(codeVal);
           log.push(`Note: ${codeVal} is in-progress (left unticked).`);
         }
       }
     }
   });
+
+  appendOverflowSection(match, writtenCodes, log, workbook);
 
   const out = await workbook.xlsx.writeBuffer();
   const blob = new Blob([out], {

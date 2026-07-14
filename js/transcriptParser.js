@@ -7,7 +7,6 @@
 const NOISE_PATTERNS = [
   /\bGPA\b/i,
   /\bGPS\b/i,
-  /semester/i,
   /transfer credit/i,
   /total number of credit/i,
   /cumulative/i,
@@ -40,6 +39,7 @@ function parseTranscript(lines) {
 
   const courses = [];
   let pending = null;
+  let currentSemester = null; // most recent "... Semester ..." header line seen so far
 
   const finalize = () => {
     if (!pending) return;
@@ -51,6 +51,7 @@ function parseTranscript(lines) {
         credit: pending.credit,
         grade: pending.grade,
         status: gradeStatus(pending.grade),
+        semester: pending.semester,
       });
     }
     pending = null;
@@ -63,8 +64,18 @@ function parseTranscript(lines) {
     const codeMatch = line.match(/^(\d{8})\b\s*(.*)$/);
     if (codeMatch) {
       finalize();
-      pending = { code: codeMatch[1], title: '', credit: null, grade: null };
+      pending = { code: codeMatch[1], title: '', credit: null, grade: null, semester: currentSemester };
       absorb(pending, codeMatch[2]);
+      continue;
+    }
+
+    // Semester header/footer lines (e.g. "1st Semester 2564", "Semester GPA 3.45").
+    // Whichever one lands immediately before a course code line is that course's
+    // semester label — footer lines get overwritten by the next header before any
+    // course line reattaches to them, so no explicit header/footer distinction is needed.
+    if (/semester/i.test(line)) {
+      finalize();
+      currentSemester = line;
       continue;
     }
 

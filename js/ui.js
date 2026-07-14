@@ -7,6 +7,8 @@ let TEMPLATE_BUFFER = null;
 let selectedAltPath = null;
 let LAST_PARSED = null; // { student, printedEarned } — for re-render on language switch
 let CURRENT_COURSES = []; // rows from the review table as of the last check, for enrolled-course lookup
+let SEMESTERS = []; // [{ label, courses }] grouped from the last parsed transcript, in transcript order
+let SEMESTER_IDX = 0; // which SEMESTERS entry the pager is showing
 
 const ALT_PATH_KEYS = {
   project: 'altPathProject', cooperative: 'altPathCooperative', overseas: 'altPathOverseas',
@@ -29,6 +31,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     return;
   }
   wireUpload();
+  wireSemesterPager();
   wireReview();
   wireExcel();
   wireAltPathPicker();
@@ -86,6 +89,7 @@ function wireLangSwitch() {
 function onLangChange() {
   if (CURRICULUM) applyCurriculumText();
   if (LAST_PARSED) renderStudent(LAST_PARSED.student, LAST_PARSED.printedEarned);
+  if (SEMESTERS.length) renderSemesterSummary();
   const collapsed = $('#courseTable').classList.contains('title-collapsed');
   $('#toggleTitleBtn').textContent = t(collapsed ? 'showTitleColumn' : 'hideTitleColumn');
   if (MATCH) renderResults(MATCH);
@@ -123,6 +127,9 @@ async function handlePdf(file) {
     LAST_PARSED = { student: parsed.student, printedEarned: parsed.printedEarned };
     renderStudent(parsed.student, parsed.printedEarned);
     renderCourseTable(parsed.courses);
+    SEMESTERS = groupBySemester(parsed.courses);
+    SEMESTER_IDX = SEMESTERS.length - 1; // default to the most recent semester
+    renderSemesterSummary();
     $('#reviewSection').classList.remove('hidden');
     $('#reviewSection').dataset.printedEarned = parsed.printedEarned ?? '';
     status.className = 'status ok';
@@ -141,6 +148,95 @@ function renderStudent(student, printedEarned) {
   if (student.program) bits.push(esc(student.program));
   if (printedEarned != null) bits.push(t('transcriptStatesCredits', { n: printedEarned }));
   $('#studentInfo').innerHTML = bits.join(' · ');
+}
+
+// Same grade->point scale and GPA-eligibility rule as gradePlanner.js (S/U/W/I
+// and ungraded courses don't count toward GPA). Duplicated rather than shared
+// since gradePlanner.js isn't loaded on this page and both files already
+// declare their own `$`/i18n wiring.
+const GRADE_POINTS = { A: 4.0, 'B+': 3.5, B: 3.0, 'C+': 2.5, C: 2.0, 'D+': 1.5, D: 1.0, F: 0.0 };
+
+// Groups the flat parsed course list by the semester header line each course
+// followed in the source PDF, preserving transcript (chronological) order,
+// and tags each group with its own GPA plus the running cumulative GPA and
+// how much that cumulative GPA moved because of this semester's grades.
+function groupBySemester(courses) {
+  const map = new Map();
+  for (const c of courses) {
+    const key = c.semester || t('unknownSemester');
+    if (!map.has(key)) map.set(key, []);
+    map.get(key).push(c);
+  }
+  const semesters = [...map.entries()].map(([label, courses]) => ({ label, courses }));
+
+  let cumCredits = 0, cumPoints = 0, prevCumulativeGpa = null;
+  for (const sem of semesters) {
+    let semCredits = 0, semPoints = 0;
+    for (const c of sem.courses) {
+      const g = (c.grade || '').toUpperCase();
+      if (Object.prototype.hasOwnProperty.call(GRADE_POINTS, g)) {
+        semCredits += c.credit;
+        semPoints += c.credit * GRADE_POINTS[g];
+      }
+    }
+    sem.gpa = semCredits > 0 ? semPoints / semCredits : null;
+    cumCredits += semCredits;
+    cumPoints += semPoints;
+    sem.cumulativeGpa = cumCredits > 0 ? cumPoints / cumCredits : null;
+    sem.cumulativeDelta = (sem.gpa !== null && prevCumulativeGpa !== null)
+      ? sem.cumulativeGpa - prevCumulativeGpa : null;
+    prevCumulativeGpa = sem.cumulativeGpa;
+  }
+  return semesters;
+}
+
+function wireSemesterPager() {
+  $('#semPrevBtn').addEventListener('click', () => {
+    if (SEMESTER_IDX > 0) { SEMESTER_IDX--; renderSemesterSummary(); }
+  });
+  $('#semNextBtn').addEventListener('click', () => {
+    if (SEMESTER_IDX < SEMESTERS.length - 1) { SEMESTER_IDX++; renderSemesterSummary(); }
+  });
+}
+
+function renderSemesterSummary() {
+  const wrap = $('#semesterSummary');
+  if (!SEMESTERS.length) { wrap.classList.add('hidden'); return; }
+  wrap.classList.remove('hidden');
+
+  const sem = SEMESTERS[SEMESTER_IDX];
+  const credits = sem.courses
+    .filter((c) => c.status !== 'in-progress')
+    .reduce((s, c) => s + c.credit, 0);
+
+  $('#semesterLabel').textContent = sem.label;
+  $('#semesterPos').textContent = t('semesterPos', { n: SEMESTER_IDX + 1, total: SEMESTERS.length });
+
+  const gpaText = (v) => (v == null ? t('gpNoDataYet') : v.toFixed(3));
+  const deltaHtml = sem.cumulativeDelta == null ? '' : `<div class="gp-filled-count">${t('semCumulativeDelta', {
+    sign: sem.cumulativeDelta >= 0 ? '+' : '', delta: sem.cumulativeDelta.toFixed(3),
+  })}</div>`;
+  $('#semesterGpaStats').innerHTML = `
+    <div class="gp-stat">
+      <div class="gp-stat-label">${esc(t('semGpaLabel'))}</div>
+      <div class="gp-stat-value">${gpaText(sem.gpa)}</div>
+    </div>
+    <div class="gp-stat">
+      <div class="gp-stat-label">${esc(t('semCumulativeGpaLabel'))}</div>
+      <div class="gp-stat-value">${gpaText(sem.cumulativeGpa)}</div>
+      ${deltaHtml}
+    </div>`;
+
+  $('#semesterCourses').innerHTML = sem.courses.map((c) => `
+    <tr>
+      <td class="code-cell">${esc(c.code)}</td>
+      <td class="title-col">${esc(c.title)}</td>
+      <td class="credit-cell">${c.credit}</td>
+      <td class="grade-cell">${esc(c.grade || '—')}</td>
+    </tr>`).join('');
+  $('#semesterCreditsTotal').textContent = t('semesterCreditsTotal', { n: credits });
+  $('#semPrevBtn').disabled = SEMESTER_IDX === 0;
+  $('#semNextBtn').disabled = SEMESTER_IDX === SEMESTERS.length - 1;
 }
 
 // ---------- Step 2: editable review table ----------
